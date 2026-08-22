@@ -1,5 +1,6 @@
 # Kotlin website
 [![Official project][project-badge]][project-url]
+[![Qodana Code Quality Check](https://github.com/Unity-Billal-mesloub/kotlin-web-site/actions/workflows/qodana-code-quality-check.yml/badge.svg)](https://github.com/Unity-Billal-mesloub/kotlin-web-site/actions/workflows/qodana-code-quality-check.yml)
 
 This repository is the source for [https://kotlinlang.org](https://kotlinlang.org).
 
@@ -18,42 +19,41 @@ This repository is the source for [https://kotlinlang.org](https://kotlinlang.or
 |-----------------------------------------------------------|----------------------------------------------------------|
 | [Main page](https://kotlinlang.org/)                      | [templates/pages/index.html](templates/pages/index.html) |
 | [Kotlin docs](https://kotlinlang.org/docs/home.html)      | [docs/topics](docs/topics)                               |
-| [Backend](https://kotlinlang.org/backend/)                | [pages/backend](pages/backend)                           |
+| [Server-side](https://kotlinlang.org/server-side/)        | [pages/server-side](pages/server-side)                   |
 | [Multiplatform](https://kotlinlang.org/multiplatform/)    | [pages/multiplatform](pages/multiplatform)               |
 | [Case Studies](https://kotlinlang.org/case-studies/)      | [pages/case-studies](pages/case-studies)                 |
 | [Community](https://kotlinlang.org/community/)            | [pages/community](pages/community)                       | 
-| [Education](https://kotlinlang.org/education/)            | [pages/education](pages/education)                       | 
+| [Education](https://kotlinlang.org/education/)            | [templates/pages/education](templates/pages/education)   | 
 
 #### Sources in different repositories
 
-Source files for the language specification and the docs for Kotlin Multiplatform, coroutines, serialization, lincheck, Dokka,
+Source files for the language specification and the docs for Kotlin Mulitplatform, coroutines, lincheck, Dokka,
 and Library creators' guidelines are stored in separate repositories
 
 | Website page                                                                                     | GitHub repository                                                                           |
 |--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| [Kotlin Multiplatform docs](https://kotlinlang.org/docs/multiplatform/get-started.html)          | [kotlin-multiplatform-dev-docs](https://github.com/JetBrains/kotlin-multiplatform-dev-docs) |
-| [Coroutines docs](https://kotlinlang.org/docs/coroutines-guide.html)                             | [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines/)                         |
-| [Serialization docs](https://kotlinlang.org/docs/serialization.html)                             | [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)                    |
-| [Lincheck docs](https://kotlinlang.org/docs/lincheck-guide.html)                                 | [kotlinx.lincheck](https://github.com/Kotlin/kotlinx-lincheck/)                             |
-| [Dokka docs](https://kotlinlang.org/docs/dokka-introduction.html)                                | [dokka](https://github.com/Kotlin/dokka/)                                                   |
-| [Library creators' guidelines](https://kotlinlang.org/docs/jvm-api-guidelines-introduction.html) | [api-guidelines](https://github.com/Kotlin/api-guidelines)                                  |
-| [Language specification](https://kotlinlang.org/spec/introduction.html)                          | [kotlin-spec](https://github.com/Kotlin/kotlin-spec)                                        |
+| [Kotlin Multiplafrom docs](https://kotlinlang.org/docs/multiplatform/get-started.html)           | [kotlin-multiplatform-dev-docs](https://github.com/Unity-Billal-mesloub/kotlin-multiplatform-dev-docs) |
+| [Coroutines docs](https://kotlinlang.org/docs/coroutines-guide.html)                             | [kotlinx.coroutines](https://github.com/Unity-Billal-mesloub/kotlinx.coroutines/)                         |
+| [Lincheck docs](https://kotlinlang.org/docs/lincheck-guide.html)                                 | [kotlinx.lincheck]
+| [Dokka docs](https://kotlinlang.org/docs/dokka-introduction.html)                                | [dokka](https://github.com/Unity-Billal-mesloub/dokka/)                                                   |
+| [Library creators' guidelines](https://kotlinlang.org/docs/jvm-api-guidelines-introduction.html) | [api-guidelines](https://github.com/Unity-Billal-mesloub/api-guidelines)                                  |
+| [Language specification](https://kotlinlang.org/spec/introduction.html)                          | [kotlin-spec](https://github.com/Unity-Billal-mesloub/kotlin-spec)                                        |
 
 #### Auto-generated content
 
 [API reference documentation](https://kotlinlang.org/api/latest/jvm/stdlib/) is generated based on comments in the Kotlin code. 
 Learn more about [documenting the Kotlin code](https://kotlinlang.org/docs/kotlin-doc.html).
 
-The [Kotlin grammar reference](https://kotlinlang.org/grammar/) is generated by the [Kotlin grammar generator](https://github.com/Kotlin/website-grammar-generator) from the
-[Kotlin grammar definition](https://github.com/Kotlin/kotlin-spec/tree/release/grammar/src/main/antlr).
+The [Kotlin grammar reference](https://kotlinlang.org/docs/reference/grammar.html) is generated by the [Kotlin grammar generator](https://github.com/Unity-Billal-mesloub/website-grammar-generator) from the
+[Kotlin grammar definition](https://github.com/Unity-Billal-mesloub/kotlin-spec/tree/release/grammar/src/main/antlr).
 
 ### Configuration files
 
-| Configuration                      | File                                                                                 |
-|------------------------------------|--------------------------------------------------------------------------------------|
-| Navigation and structure           | [kr.tree](docs/kr.tree) for docs                                                     |
-| Variables, such as release version | [v.list](docs/v.list) for docs and [releases.yml](data/releases.yml) for other pages |
-| Community events on the map        | [events.xml](data/events.yml)                                                        |
+|Configuration| File                                                                                |
+|-----|-------------------------------------------------------------------------------------|
+|Navigation and structure| [kr.tree](docs/kr.tree) for docs |
+|Variables, such as release version | [v.list](docs/v.list) for docs and [releases.yml](data/releases.yml) for other pages |
+|Community events on the map | [events.xml](data/events.yml)                                                         |
 
 
 ### Templates
@@ -100,7 +100,7 @@ Once you publish a pull request, the changes will be validated by [GitHub Action
 To add a case study, do the following:
 1. Fill the case study info in the [case-studies.yml](/data/case-studies/case-studies.yml) with the next:
    - `id`, a unique identifier for the case study.
-    - `type`, the case study category: either `multiplatform` or `backend`.
+    - `type`, the case study category: either `multiplatform` or `server-side`.
     - `description`, a markdown-enabled text description of the case study (supports # header  **bold** and [links](https://example.com), paragraphs are made with two new lines).
     - `logo` (optional), an array of 0-2 image paths relative to the `/public/` directory.
     - `signature` (optional), an object with `name` and `position` fields for the quote author.
@@ -114,7 +114,7 @@ To add a case study, do the following:
 
    You can see the structure and types of the expected configuration in [the JSON schema](/data/schemas/case-studies.json) and in the [example file](/data/case-studies/_case-study.example.yaml).
 2. The order of case studies in the file defines the order of their appearance on the website. Place new case studies accordingly.
-3. Publish the changes by creating a pull request. The changes will be validated by [GitHub Actions Workflow](.github/workflows/validate-case-studies-data.yml) to prevent misconfiguration.
+3. Publish the changes creating a pull request. The changes will be validated by [GitHub Actions Workflow](.github/workflows/validate-case-studies-data.yml) to prevent misconfiguration.
 
 ## Local deployment
 
@@ -124,15 +124,12 @@ You can contribute to the Kotlin website by sending us a pull request.
 
 ## PDF Generation
 
-Before you begin, make sure your local environment is connected to the WebTeam registry. Learn more about it [in the section below](#local-development).
-
 To generate a PDF version of the Kotlin documentation:
 
-1. Download the documentation artifacts from the [Kotlin Reference with coroutines CI build](https://buildserver.labs.intellij.net/buildConfiguration/Kotlin_KotlinSites_KotlinlangTeamcityDsl_KotlinWithCoroutines) and place them in the `dist` folder. Note that images should be placed into /dist/images.
+1. Download the documentation artifacts from the [Reference Docs CI build](https://buildserver.labs.intellij.net/buildConfiguration/Kotlin_KotlinSites_KotlinlangTeamcityDsl_BuildReferenceDocs) and place them in the `dist` folder.
 2. Run:
    ```bash
    yarn install
-   cd scripts/dist && npm install && cd ../../
    yarn generate-pdf
    ```
 
@@ -202,20 +199,8 @@ You can find all pages in the [pages](pages) directory.
 
 ### Images in Next.js
 
-Use `next/image` for raster images (PNG, JPG, WebP). Static imports provide automatic width/height:
-
-```tsx
-import Image from 'next/image';
-import myImage from './my-image.png';
-
-<Image src={myImage} alt="..." />
-```
-
-For SVGs displayed as images, use a plain `<img>` tag with the public path:
-
-```tsx
-<img src="/images/path/to/icon.svg" alt="" />
-```
+Notice that using `next/image` is not possible because Next.js does not support importing images to HTML files (SSG).
+Use Img and Svg components from "next-optimized-images" instead.
 
 # Tests
 
@@ -261,7 +246,7 @@ To run these tests locally, follow the next steps:
 2. Open the last successful build of [Reference Docs](https://buildserver.labs.intellij.net/buildConfiguration/Kotlin_KotlinSites_KotlinlangTeamcityDsl_BuildReferenceDocs?branch=&mode=builds#all-projects) on TeamCity.
 3. Download the artifacts of this build and place them in the `dist` folder.
 4. Run the tests locally with the following command `yarn run test:e2e`
-5. Run the tests in docker container with the following command `docker compose -f docker-compose-e2e.yml up --build  --exit-code-from playwright`
+5. Run the tests in docker container with the following command `docker compose -f docker-compose-e2e-statics.yml up --build  --exit-code-from playwright`
 
 ## API references tests
 

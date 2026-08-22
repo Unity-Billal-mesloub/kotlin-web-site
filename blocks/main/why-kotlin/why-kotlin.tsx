@@ -10,9 +10,9 @@ import NavItem from '@jetbrains/kotlin-web-site-ui/out/components/nav-item';
 import { SidebarMenu, SidebarMenuHeader } from '@jetbrains/kotlin-web-site-ui/out/components/sidebar-menu';
 
 import '@jetbrains/kotlin-web-site-ui/out/components/layout';
-import { useTS } from '@jetbrains/kotlin-web-site-ui/out/components/breakpoints';
+import { useML } from '@jetbrains/kotlin-web-site-ui/out/components/breakpoints-v2';
 
-import { CodeBlock } from '../../../components/code-block/code-block';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 import styles from './why-kotlin.module.css';
 import './playground.css';
@@ -24,6 +24,7 @@ import functionalExample from './code-examples/functional.md';
 import testsExample from './code-examples/ideal-for-tests.md';
 
 import { generateCrosslink } from 'kotlin-playground/dist/crosslink';
+import { trackOptimizelyEvent } from '@/utils/optimizely';
 
 interface Props {}
 
@@ -38,8 +39,8 @@ export const WhyKotlin: FC<Props> = ({}) => {
     const textCn = useTextStyles();
     const darkTextCn = createTextCn('dark');
 
-    const isTS = useTS();
-    const headerClass = isTS ? 'rs-h3' : 'rs-h2';
+    const isML = useML();
+    const headerClass = isML ? 'rs-h3' : 'rs-h2';
 
     const codeExamplesList = [
         { children: 'Simple', codeExample: simpleExample },
@@ -56,15 +57,24 @@ export const WhyKotlin: FC<Props> = ({}) => {
     const handleRunButton = useCallback(() => {
         codeInstanceRef?.current?.runInstance();
         codeInstanceRef?.current?.scrollResultsToView();
+
+        trackOptimizelyEvent('opt_main-page_run');
     }, [codeInstanceRef]);
 
     const { codeExample, children, ...options } = codeExamplesList[activeIndex];
     const handleOpenInPlaygroundButton = useCallback(() => {
         const link = generateCrosslink(codeExample, options);
+
+        trackOptimizelyEvent('opt_main-page_open_in_playground');
         if (typeof window !== 'undefined') {
             window.open(link, '_blank');
         }
     }, [activeIndex]);
+
+    const handleTabClick = (index, tabName) => {
+        trackOptimizelyEvent('opt_main-page_tab_click', { tab: tabName });
+        setActiveIndex(index);
+    };
 
     const handleMobileMenuItemClick = useCallback(
         (index) => {
@@ -122,7 +132,7 @@ export const WhyKotlin: FC<Props> = ({}) => {
                                     {codeExamplesList.map((item, index) => (
                                         <NavItem
                                             key={index}
-                                            onClick={() => setActiveIndex(index)}
+                                            onClick={() => handleTabClick(index, item.children)}
                                             active={activeIndex === index}
                                         >
                                             {item.children}

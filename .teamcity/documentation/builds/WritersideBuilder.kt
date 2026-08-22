@@ -1,5 +1,6 @@
 package documentation.builds
 
+import common.extensions.isProjectPlayground
 import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
@@ -12,7 +13,7 @@ abstract class WritersideBuilder(
     customInit: BuildType.() -> Unit = {},
     postProcessAdditions: String = postProcessingScript(),
 ) : BuildType({
-    val dockerImageTag = "2.1.2180-p8506"
+    val dockerImageTag = "ked-websites-stable"
     val frontend = "file:///opt/static/"
 
     name = "${instance.uppercase()} documentation build"
@@ -25,6 +26,7 @@ abstract class WritersideBuilder(
 
     triggers {
         vcs {
+            enabled = !isProjectPlayground()
             branchFilter = "+:<default>"
         }
     }
@@ -69,6 +71,7 @@ abstract class WritersideBuilder(
                 bash -euo pipefail /usr/local/bin/script.sh
             """.trimIndent()
             dockerImage = "registry.jetbrains.team/p/writerside/builder/writerside-builder:$dockerImageTag"
+            dockerPull = true
             dockerRunParameters = """
                 --rm -v %teamcity.build.checkoutDir%:/opt/sources
                 -v %teamcity.build.checkoutDir%/static:/opt/static

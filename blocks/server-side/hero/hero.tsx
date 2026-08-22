@@ -100,7 +100,7 @@ export const ServerSideHero: FC = ({}) => {
                         <Button
                             mode={'outline'}
                             size={'l'}
-                            href={'/case-studies/'}
+                            href={'/case-studies/?type=backend'}
                             data-testid={'hero-block-case-studies-link'}
                         >
                             Who uses Kotlin

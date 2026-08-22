@@ -12,7 +12,6 @@ You can enable binary options in the `gradle.properties` file, your build file, 
 You can set binary options in your project's `gradle.properties` file using the `kotlin.native.binary` property. For example:
 
 ```none
-kotlin.native.binary.gc=cms
 kotlin.native.binary.latin1Strings=true
 ```
 
@@ -64,23 +63,23 @@ kotlinc-native main.kt -Xbinary=enableSafepointSignposts=true
 >
 {style="note"}
 
-<table column-width="fixed">
+<table sticky-header="true">
     <tr>
-        <td width="240">Option</td>
-        <td width="170">Values</td>
-        <td>Description</td>
-        <td width="110">Status</td>
+        <td width="100">Option</td>
+        <td width="50">Values</td>
+        <td width="150">Description</td>
+        <td width="80">Status</td>
     </tr>
     <tr>
         <td><a href="native-objc-interop.md#explicit-parameter-names-in-objective-c-block-types"><code>objcExportBlockExplicitParameterNames</code></a></td>
         <td>
             <list>
-                <li><code>true (default)</code></li>
-                <li><code>false</code></li>
+                <li><code>true</code></li>
+                <li><code>false (default)</code></li>
             </list>
         </td>
         <td>Adds explicit parameter names to function types for exported Objective-C headers.</td>
-        <td>Default since 2.3.0</td>
+        <td>Experimental since 2.2.20</td>
     </tr>
     <tr>
         <td><a href="whatsnew2220.md#smaller-binary-size-for-release-binaries"><code>smallBinary</code></a></td>
@@ -146,24 +145,24 @@ kotlinc-native main.kt -Xbinary=enableSafepointSignposts=true
         <td>Available since 2.2.0</td>
     </tr>
     <tr>
-        <td><code>gc</code></td>
+        <td><a href="native-memory-manager.md#garbage-collector"><code>gc</code></a></td>
         <td>
             <list>
-                <li><code>pmcs</code> (default)</li>
+                <li><code>cms</code> (default)</li>
+                <li><code>pmcs</code></li>
                 <li><code>stwms</code></li>
-                <li><a href="native-memory-manager.md#optimize-gc-performance"><code>cms</code></a></li>
                 <li><a href="native-memory-manager.md#disable-garbage-collection"><code>noop</code></a></li>
             </list>
         </td>
         <td>Controls garbage collection behavior:
             <list>
+                <li><code>cms</code> uses concurrent mark and sweep</li>
                 <li><code>pmcs</code> uses parallel mark concurrent sweep</li>
                 <li><code>stwms</code> uses simple stop-the-world mark and sweep</li>
-                <li><code>cms</code> enables concurrent marking that helps decrease GC pause time</li>
                 <li><code>noop</code> disables garbage collection</li>
             </list>
         </td>
-        <td><code>cms</code> is Experimental since 2.0.20</td>
+        <td><code>cms</code> is default since 2.4.0</td>
     </tr>
     <tr>
         <td><a href="native-memory-manager.md#garbage-collector"><code>gcMarkSingleThreaded</code></a></td>

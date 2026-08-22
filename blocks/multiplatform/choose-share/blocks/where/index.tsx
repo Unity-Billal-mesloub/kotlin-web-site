@@ -9,6 +9,7 @@ import styles from './choose-share-where.module.css';
 
 import { useTabScroll } from '../../hooks/useTabScroll';
 import Link from 'next/link';
+import { trackEvent } from '../../../../../utils/event-logger';
 
 
 const TABS_BLOCKS = [
@@ -48,8 +49,8 @@ const TABS_BLOCKS = [
         Icon: props => <GlobusIcon {...props} />,
         Content: () => (
             <>
-                Share business logic with your web application and take advantage of Kotlin/Wasm and Compose
-                Multiplatform to bring your app’s UX to the&nbsp;browser.
+                Share business logic with your web application via Kotlin/JS or&nbsp;take full advantage
+                of&nbsp;code sharing by bringing your app’s&nbsp;UX to the browser using Compose&nbsp;Multiplatform and Kotlin/Wasm.
             </>
         )
     },
@@ -91,6 +92,14 @@ export function ChooseShareWhere({ className }: { className?: string }) {
 
     const navigateToHash = useTabScroll(TABS_BLOCKS, 'choose-share-where-', setActiveIndex);
 
+    const handleTabClick = (e: MouseEvent, tabId: string) => {
+        trackEvent({
+            eventAction: 'kt_kmp_choose_where_to_share_click',
+            eventLabel: tabId
+        });
+        navigateToHash(e);
+    };
+
     return (
         <section className={cn(className, styles.wrap, 'ktl-layout', 'ktl-layout--center')}>
             <h2 className={cn(styles.title, textCn('rs-h2'))}>Choose where to share</h2>
@@ -110,7 +119,8 @@ export function ChooseShareWhere({ className }: { className?: string }) {
                               id={`choose-share-where-${id}-tab`} role="tab"
                               aria-controls={`choose-share-where-${id}-pane`}
                               className={styles.tab} aria-label={`Go to ${id} section`}
-                              onClick={navigateToHash} {...(activeIndex === i && { 'aria-selected': true })}>
+                              onClick={(e) => handleTabClick(e, id)}
+                              {...(activeIndex === i && { 'aria-selected': true })}>
                             {tab}
                         </Chip>
                     ))}

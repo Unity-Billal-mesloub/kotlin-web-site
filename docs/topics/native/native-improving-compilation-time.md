@@ -97,6 +97,15 @@ Similarly, instead of running `assembleXCFramework`, you can run `assembleShared
 >
 {style="tip"}
 
+### Reduce the size of release binaries
+<primary-label ref="experimental-opt-in"/>
+
+To reduce the size of release binaries and improve build time, try [enabling the binary option](native-binary-options.md#how-to-enable)
+`smallBinary`.
+
+It effectively sets `-Oz` as the default optimization argument for the compiler during the LLVM compilation phase.
+The option is still [Experimental](components-stability.md#stability-levels-explained) and might affect runtime performance in some cases.
+
 ### Don't disable Gradle daemon
 
 Don't disable the [Gradle daemon](https://docs.gradle.org/current/userguide/gradle_daemon.html) without having a good reason. By default, [Kotlin/Native runs from the Gradle daemon](https://blog.jetbrains.com/kotlin/2020/03/kotlin-1-3-70-released/#kotlin-native).
@@ -124,34 +133,43 @@ Enable the Gradle [build cache](https://docs.gradle.org/current/userguide/build_
 
 ### Use Gradle configuration cache
 
-To use the Gradle [configuration cache](https://docs.gradle.org/current/userguide/configuration_cache.html),
-add `org.gradle.configuration-cache=true` to your `gradle.properties` file.
+The Gradle [configuration cache](https://docs.gradle.org/current/userguide/configuration_cache.html) improves build performance
+by caching the results of the configuration phase. It also enables parallel execution of independent tasks within a single
+project and implicitly enables the `org.gradle.parallel` property, allowing tasks across different projects to [execute in parallel](https://docs.gradle.org/current/userguide/performance.html#sec:enable_parallel_execution).
 
-> Configuration cache also enables running `link*` tasks in parallel which could heavily load the machine, 
+To use the Gradle configuration cache, add the `org.gradle.configuration-cache=true` property to your `gradle.properties` file.
+
+> The configuration cache also enables running `link*` tasks in parallel which could heavily load the machine, 
 > specifically with a lot of CPU cores. This issue will be fixed in [KT-70915](https://youtrack.jetbrains.com/issue/KT-70915).
 >
 {style="note"}
 
 ### Enable previously disabled features
 
-There are Kotlin/Native properties that disable the Gradle daemon and compiler caches:
+There are Kotlin/Native options that disable the Gradle daemon and compiler caches:
 
 * `kotlin.native.disableCompilerDaemon=true`
-* `kotlin.native.cacheKind=none`
-* `kotlin.native.cacheKind.$target=none`, where `$target` is a Kotlin/Native compilation target, for example `iosSimulatorArm64`.
+* [`disableNativeCache`](https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html#binaries) DSL
+  in the `binaries {}` block of your Gradle build file.
 
-If you had issues with these features before and added these lines to your `gradle.properties` file or Gradle arguments,
+If you had issues with these features before and added these lines to your `gradle.properties` file or Gradle build files,
 remove them and check whether the build completes successfully. It is possible that these properties were added previously
 to work around issues that have already been fixed.
 
 ### Try incremental compilation of klib artifacts
+<primary-label ref="experimental-opt-in"/>
 
 With incremental compilation, if only a part of the `klib` artifact produced by the project module changes,
 just a part of `klib` is further recompiled into a binary.
 
-This feature is [Experimental](components-stability.md#stability-levels-explained). To enable it,
-add the `kotlin.incremental.native=true` option to your `gradle.properties` file. If you face any problems,
-create an [issue in YouTrack](https://kotl.in/issue).
+This feature is still [Experimental](components-stability.md#stability-levels-explained). To enable it,
+add the following option to your `gradle.properties` file:
+
+```properties
+kotlin.incremental.native=true
+```
+
+If you face any problems, create an [issue in YouTrack](https://kotl.in/issue).
 
 ## Windows configuration
 

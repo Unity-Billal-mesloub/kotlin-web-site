@@ -4,16 +4,20 @@
 
 _[Released: December 16, 2025](releases.md#release-history)_
 
+<tldr>
+    <p>For details about bug fix release 2.3.10, see the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.3.10">changelog</a></p>
+</tldr>
+
 The Kotlin 2.3.0 release is out! Here are the main highlights:
 
-* **Language**: [more stable and default features, unused return value checker, explicit backing fields, and changes to context-sensitive resolution](#language).
-* **Kotlin/JVM**: [support for Java 25](#kotlin-jvm-support-for-java-25).
-* **Kotlin/Native**: [improved interop through Swift export, faster build time for release tasks, C and Objective-C library import in Beta](#kotlin-native).
-* **Kotlin/Wasm**: [fully qualified names and new exception handling proposal enabled by default, as well as new compact storage for Latin-1 characters](#kotlin-wasm).
-* **Kotlin/JS**: [new experimental suspend function export, `LongArray` representation, unified companion object access, and more](#kotlin-js).
-* **Gradle**: [compatibility with Gradle 9.0 and a new API for registering generated sources](#gradle).
-* **Compose compiler**: [stack traces for minified Android applications](#compose-compiler-stack-traces-for-minified-android-applications).
-* **Standard library**: [stable time tracking functionality and improved UUID generation and parsing](#standard-library).
+* **Language**: [More stable and default features, unused return value checker, explicit backing fields, and changes to context-sensitive resolution](#language).
+* **Kotlin/JVM**: [Support for Java 25](#kotlin-jvm-support-for-java-25).
+* **Kotlin/Native**: [Improved interop through Swift export, faster build time for release tasks, C and Objective-C library import in Beta](#kotlin-native).
+* **Kotlin/Wasm**: [Fully qualified names and new exception handling proposal enabled by default, as well as new compact storage for Latin-1 characters](#kotlin-wasm).
+* **Kotlin/JS**: [New experimental suspend function export, `LongArray` representation, unified companion object access, and more](#kotlin-js).
+* **Gradle**: [Compatibility with Gradle 9.0 and a new API for registering generated sources](#gradle).
+* **Compose compiler**: [Stack traces for minified Android applications](#compose-compiler-stack-traces-for-minified-android-applications).
+* **Standard library**: [Stable time tracking functionality and improved UUID generation and parsing](#standard-library).
 
 You can also find an overview of the updates in this video:
 
@@ -220,6 +224,10 @@ We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/i
 
 Kotlin 2.3.0 introduces explicit backing fields – a new syntax for explicitly declaring the underlying field that holds
 a property's value, in contrast to the existing implicit backing fields.
+
+You can find an overview of this feature in this video:
+
+<video src="https://www.youtube.com/v/PU-VdH8HhVA" title="Explicit Backing Fields are experimental in Kotlin 2.3"/>
 
 The new explicit syntax simplifies the common backing properties pattern where a property's internal type is different
 from its exposed API type. For example, you might use an `ArrayList` while exposing it as a read-only `List` or a `MutableList`.
@@ -1010,7 +1018,8 @@ For a complete overview, see our [Compatibility guide](compatibility-guide-23.md
 
 * If you continue using the Kotlin Multiplatform Gradle plugin for Android targets with Android Gradle plugin (AGP)
   9.0.0 or later, you see a configuration error when using the `androidTarget` block, along with diagnostic messages that
-  provide guidance on how to migrate. For more information, see [Migrate to Google's plugin for Android targets](https://kotlinlang.org/docs/multiplatform/multiplatform-compatibility-guide.html#migrate-to-google-s-plugin-for-android-targets).
+  provide guidance on how to migrate. You can avoid this error by using AGP 8.x and updating to Kotlin 2.3.10, or by migrating to
+  [Google's plugin for Android targets](https://kotlinlang.org/docs/multiplatform/multiplatform-compatibility-guide.html#migrate-to-google-s-plugin-for-android-targets).
 
 * AGP 9.0.0 includes [built-in support for Kotlin](https://developer.android.com/build/releases/agp-preview#android-gradle-plugin-built-in-kotlin).
   Starting with Kotlin 2.3.0, you [see a configuration error if you use this version of AGP with the `kotlin-android` plugin](compatibility-guide-23.md#deprecate-kotlin-android-plugin-for-agp-versions-9-0-0-and-later),
@@ -1036,7 +1045,7 @@ Other notable changes since the last Kotlin release:
 * [Classes](classes.md) – learn the basics and best practices of using classes in Kotlin.
 * [Extensions](extensions.md) – learn how you can extend classes and interfaces in Kotlin.
 * [Coroutines basics](coroutines-basics.md) – explore key coroutine concepts and learn how to create your first coroutines.
-* [Cancellation and timeouts](cancellation-and-timeouts.md) – learn how coroutine cancellation works and how to make
+* [Cancellation and timeouts](coroutines-cancellation.md) – learn how coroutine cancellation works and how to make
   coroutines respond to cancellation.
 * [Kotlin/Native libraries](native-libraries.md) – see how to produce `klib` library artifacts.
 * [Kotlin Notebook overview](kotlin-notebook-overview.md) – create interactive notebook documents with the Kotlin Notebook plugin.

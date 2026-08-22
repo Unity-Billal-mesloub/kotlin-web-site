@@ -31,7 +31,7 @@ val securePassword = Password("Don't try this in production")
 ```
 
 This is the main feature of inline classes, which inspired the name *inline*: data of the class is *inlined* into its 
-usages (similar to how content of [inline functions](inline-functions.md) is inlined to call sites).
+usages (similar to how the content of [inline functions](inline-functions.md) is inlined to call sites).
 
 ## Members
 
@@ -100,7 +100,7 @@ other classes and are always `final`.
 
 In generated code, the Kotlin compiler keeps a *wrapper* for each inline class. Inline class instances can be represented 
 at runtime either as wrappers or as the underlying type. This is similar to how `Int` can be 
-[represented](numbers.md#boxing-and-caching-numbers-on-the-java-virtual-machine) either as a primitive `int` or as the wrapper `Integer`.
+[represented](numbers.md#boxing-and-caching-numbers-on-the-jvm) either as a primitive `int` or as the wrapper `Integer`.
 
 The Kotlin compiler will prefer using underlying types instead of wrappers to produce the most performant and optimized code. 
 However, sometimes it is necessary to keep wrappers around. As a rule of thumb, inline classes are boxed whenever they 
@@ -148,7 +148,7 @@ fun compute(s: UserId<String>) {} // compiler generates fun compute-<hashcode>(s
 
 ### Mangling
 
-Since inline classes are compiled to their underlying type, it may lead to various obscure errors, for example unexpected platform signature clashes:
+Since inline classes are compiled to their underlying type, it may lead to various obscure errors, for example, unexpected platform signature clashes:
 
 ```kotlin
 @JvmInline

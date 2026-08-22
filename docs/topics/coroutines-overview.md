@@ -47,7 +47,7 @@ Builder functions like `.launch()` and `.async()` automatically create a set of 
 * [`CoroutineExceptionHandler`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-exception-handler/) handles uncaught exceptions.
 
 These, along with other possible elements, make up the [_coroutine context_](coroutine-context-and-dispatchers.md), which is inherited by default from the coroutine's parent.
-This context forms a hierarchy that enables structured concurrency, where related coroutines can be [canceled](cancellation-and-timeouts.md) together or [handle exceptions](exception-handling.md) as a group.
+This context forms a hierarchy that enables structured concurrency, where related coroutines can be [canceled](coroutines-cancellation.md) together or [handle exceptions](exception-handling.md) as a group.
 
 ### Asynchronous flow and shared mutable state
 
@@ -64,7 +64,7 @@ To safely manage shared mutable state, use [`StateFlow`](https://kotlinlang.org/
 Then, you can update it from one coroutine and collect its latest value from others.
 <!-- Learn more in [Shared mutable state and concurrency](shared-mutable-state-and-concurrency.md). -->
 
-For more information, see [Asynchronous flow](flow.md), [Channels](channels.md), and the [Coroutines and channels tutorial](coroutines-and-channels.md).
+For more information, see [Flows](coroutines-flow.md), [Channels](channels.md), and the [Coroutines and channels tutorial](coroutines-and-channels.md).
 
 ## What's next
 

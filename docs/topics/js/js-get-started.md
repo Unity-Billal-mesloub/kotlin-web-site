@@ -15,13 +15,12 @@ To create your app, choose the tool that best fits your workflow:
 
 ## Create your application in IntelliJ IDEA 
 
-To create your Kotlin/JS web application, you can use either the
-Community or Ultimate edition of [IntelliJ IDEA](https://www.jetbrains.com/idea/download/?section=mac).
+To create your Kotlin/JS web application, you can use [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
 
 ### Set up the environment
 
 1. Download and install the latest version of [IntelliJ IDEA](https://www.jetbrains.com/idea/).
-2. [Set up your environment for Kotlin Multiplatform development](https://kotlinlang.org/docs/multiplatform/quickstart.html#set-up-the-environment).
+2. Install the [Kotlin Multiplatform IDE plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) (not to be confused with the Kotlin Multiplatform Gradle plugin).
 
 ### Create your project
 
@@ -40,7 +39,7 @@ Community or Ultimate edition of [IntelliJ IDEA](https://www.jetbrains.com/idea/
 2. Make sure the Kotlin version matches the version of the Kotlin Multiplatform Gradle plugin, which is required 
    to create a web application targeting Kotlin/JS:
 
-   ```text
+   ```toml
    [versions]
    kotlin = "%kotlinVersion%"
    
@@ -84,7 +83,7 @@ After you run the application for the first time, IntelliJ IDEA creates its corr
 
 ![Gradle run configuration](js-run-config.png){width=500}
 
-> In IntelliJ IDEA Ultimate,
+> In IntelliJ IDEA with an Ultimate subscription,
 > you can use the [JS Debugger](https://www.jetbrains.com/help/idea/configuring-javascript-debugger.html)
 > to debug code directly from the IDE.
 > 

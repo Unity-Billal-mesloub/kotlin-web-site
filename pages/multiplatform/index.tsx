@@ -7,6 +7,7 @@ import '@jetbrains/kotlin-web-site-ui/out/components/layout-v2';
 
 import { HeroBanner } from '../../blocks/multiplatform/hero';
 import { ChooseShare } from '../../blocks/multiplatform/choose-share';
+import { KMPApps } from '../../blocks/multiplatform/kmp-apps/kmp-apps';
 import { FaqBlock } from '../../blocks/multiplatform/faq-block/faq-block';
 import { CtaBlock } from '../../blocks/multiplatform/cta-block/cta-block';
 import { CaseStudies } from '../../blocks/multiplatform/case-studies/grid';
@@ -25,6 +26,10 @@ const TOP_MENU_ITEMS: LandingLayoutProps['topMenuItems'] = [
         title: 'Success stories',
         url: '/case-studies/?type=multiplatform'
     },
+    {
+        title: 'Libraries',
+        url: 'https://klibs.io/'
+    }
 ];
 
 const GET_STARTED_URL = '/docs/multiplatform/get-started.html' as const;
@@ -44,7 +49,6 @@ export default function MultiplatformLanding() {
             topMenuHomeUrl={MULTIPLATFORM_MOBILE_URL}
             topMenuItems={TOP_MENU_ITEMS}
             topMenuButton={<Button href={GET_STARTED_URL}>Get started</Button>}
-            canonical={'https://kotlinlang.org/multiplatform/'}
         >
             <div className="ktl-layout-to-2">
                 <ThemeProvider theme={'dark'}>
@@ -52,6 +56,7 @@ export default function MultiplatformLanding() {
                     <CustomerLogos />
                     <ChooseShare />
                     <CoolVideos />
+                    <KMPApps />
                     <CaseStudies />
                     <FaqBlock />
                     <CtaBlock url={GET_STARTED_URL} />

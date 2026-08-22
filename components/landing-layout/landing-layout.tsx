@@ -1,17 +1,17 @@
 import React, { FC, useCallback, useMemo } from 'react';
-
 import Head from 'next/head';
-
 import '@jetbrains/kotlin-web-site-ui/out/components/layout-v2';
 import GlobalHeader from '@jetbrains/kotlin-web-site-ui/out/components/header';
 import GlobalFooter from '@jetbrains/kotlin-web-site-ui/out/components/footer';
 import TopMenu from '@jetbrains/kotlin-web-site-ui/out/components/top-menu';
-import { ThemeProvider } from '@rescui/ui-contexts';
+import { Theme, ThemeProvider } from '@rescui/ui-contexts';
 import { useRouter } from 'next/router';
+import cn from 'classnames';
 import styles from './landing-layout.module.css';
 import releasesDataRaw from '../../data/releases.yml';
 import searchConfig from '../../search-config.json';
 import { StickyHeader } from '../sticky-header/sticky-header';
+import { getCanonicalUrl, getSiteUrl } from '../../utils/site-config';
 
 
 const releasesData: ReleasesData = releasesDataRaw as ReleasesData;
@@ -23,6 +23,7 @@ type NavigationProps = {
     topMenuHomeUrl?: string;
     currentUrl?: string;
     currentTitle?: string;
+    mobileOverview?: boolean;
 }
 
 export type LandingLayoutProps = {
@@ -32,11 +33,26 @@ export type LandingLayoutProps = {
     children: React.ReactNode;
     dataTestId?: string;
     canonical?: string;
+    theme?: Theme;
+    forceDarkTopMenu?: boolean;
+    hideTopMenu?: boolean;
 } & NavigationProps;
 
-export const LandingLayout: FC<LandingLayoutProps> = ({ title, ogImageName, description, children, dataTestId, canonical, ...navigationProps }) => {
-    const theme = 'dark';
+export const LandingLayout: FC<LandingLayoutProps> = ({
+    title,
+    ogImageName,
+    description,
+    children,
+    dataTestId,
+    canonical,
+    theme = 'dark',
+    forceDarkTopMenu = false,
+    hideTopMenu = false,
+    mobileOverview = true,
+    ...navigationProps
+}) => {
     const router = useRouter();
+    const siteUrl = getSiteUrl();
     const pathname = addTrailingSlash(router.pathname);
 
     let items = navigationProps.topMenuItems || [];
@@ -55,14 +71,21 @@ export const LandingLayout: FC<LandingLayoutProps> = ({ title, ogImageName, desc
     );
 
     const ogImagePath = useMemo(
-        () => `https://kotlinlang.org/assets/images/open-graph/${ogImageName ? ogImageName : 'general.png'}`,
-        [ogImageName]
+        () => `${siteUrl}/assets/images/open-graph/${ogImageName ? ogImageName : 'general.png'}`,
+        [ogImageName, siteUrl]
     );
 
     const ogImageTwitterPath = useMemo(
-        () => (ogImageName ? ogImagePath : 'https://kotlinlang.org/assets/images/twitter/general.png'),
-        [ogImageName, ogImagePath]
+        () => (ogImageName ? ogImagePath : `${siteUrl}/assets/images/twitter/general.png`),
+        [ogImageName, ogImagePath, siteUrl]
     );
+
+    const canonicalUrl = useMemo(() => {
+        if (canonical) {
+            return canonical;
+        }
+        return getCanonicalUrl(router.pathname);
+    }, [canonical, router.pathname]);
 
     return (
         <>
@@ -71,7 +94,7 @@ export const LandingLayout: FC<LandingLayoutProps> = ({ title, ogImageName, desc
 
                 <meta property="og:title" content={title} />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content={'https://kotlinlang.org' + router.pathname} />
+                <meta property="og:url" content={siteUrl + router.pathname} />
 
                 {description && <meta name="description" content={description} />}
 
@@ -85,7 +108,7 @@ export const LandingLayout: FC<LandingLayoutProps> = ({ title, ogImageName, desc
                 <meta name="twitter:title" content={title} />
                 {description && <meta name="twitter:description" content={description} />}
                 <meta name="twitter:image:src" content={ogImageTwitterPath} />
-                {canonical && <link rel="canonical" href={canonical} />}
+                <link rel="canonical" href={canonicalUrl} />
             </Head>
 
             <ThemeProvider theme={theme}>
@@ -99,26 +122,33 @@ export const LandingLayout: FC<LandingLayoutProps> = ({ title, ogImageName, desc
                     hasBorder={false}
                 />
 
-                <StickyHeader>
-                    <div className={styles.sticky}>
-                        <TopMenu
-                            className={styles.topMenu}
-                            homeUrl={navigationProps.topMenuHomeUrl}
-                            title={navigationProps.topMenuTitle}
-                            activeIndex={activeIndex}
-                            items={items}
-                            linkHandler={linkHandler}
-                            mobileOverview={true}
-                        >
-                            {navigationProps.topMenuButton}
-                        </TopMenu>
-                    </div>
-                </StickyHeader>
+                {!hideTopMenu && (
+                    <StickyHeader>
+                        <div className={styles.sticky} data-testid="top-menu">
+                            <ThemeProvider theme={forceDarkTopMenu ? 'dark' : theme}>
+                                <TopMenu
+                                    className={styles.topMenu}
+                                    homeUrl={navigationProps.topMenuHomeUrl}
+                                    title={navigationProps.topMenuTitle}
+                                    activeIndex={activeIndex}
+                                    items={items}
+                                    linkHandler={linkHandler}
+                                    mobileOverview={mobileOverview}
+                                >
+                                    {navigationProps.topMenuButton}
+                                </TopMenu>
+                            </ThemeProvider>
+                        </div>
+                    </StickyHeader>
+                )}
 
-                <div className={styles.contentWrapper} data-testid={dataTestId}>
+                <div className={cn(styles.contentWrapper, { [styles.contentWrapperLight]: theme === 'light' })}
+                     data-testid={dataTestId}>
                     {children}
                 </div>
+            </ThemeProvider>
 
+            <ThemeProvider theme="dark">
                 <GlobalFooter />
             </ThemeProvider>
         </>

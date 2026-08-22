@@ -1,10 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
+import { isProduction } from '../utils';
 
 test.describe('Footer kotlin ecosystem buttons', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/');
-        await page.waitForSelector('button.ch2-btn.ch2-btn-primary');
-        await page.click('button.ch2-btn.ch2-btn-primary');
         await page.evaluate(() => {
             window.scrollTo(0, document.body.scrollHeight);
         });
@@ -30,7 +29,7 @@ test.describe('Footer kotlin ecosystem buttons', () => {
         await expect(pressKitButton).toBeVisible();
         const href = await pressKitButton.getAttribute('href');
         expect(href).toBe('https://kotlinlang.org/assets/kotlin-media-kit.pdf');
-        });
+    });
 
     test('Security button should navigate to Security page', async ({ page }) => {
         const securityButton = page.getByTestId('footer').getByRole('link', { name: 'Security' });
@@ -89,13 +88,18 @@ test.describe('Footer kotlin ecosystem buttons', () => {
         await expect(newPage.url()).toContain('https://www.jetbrainsmerchandise.com/view-all.html?brand=32');
     });
 
-    test('Opt-Out button should navigate to Opt-Out page', async ({ page }) => {
+    test('Opt-Out button should navigate to Opt-Out page', async ({ page, baseURL }) => {
         const optOutButton = page.getByTestId('footer').getByRole('link', { name: 'Opt-Out' });
         await expect(optOutButton).toBeVisible();
         await optOutButton.click();
-        const cookieSettingsPopup = page.locator('#ch2-settings-dialog');
-        await expect(cookieSettingsPopup).toBeVisible();
-        await expect(cookieSettingsPopup).toContainText('Cookie Settings');
+
+        if (isProduction(baseURL)) {
+            await test.step('check Opt-Out popup', async () => {
+                const cookieSettingsPopup = page.locator('#ch2-settings-dialog');
+                await expect(cookieSettingsPopup).toBeVisible();
+                await expect(cookieSettingsPopup).toContainText('Cookie Settings');
+            });
+        }
     });
 
     // Click on the JetBrains logo button in footer.

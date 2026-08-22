@@ -451,7 +451,7 @@ For example, the following Kotlin declaration:
 val map: Map<String, String>
 ```
 
-In Swift, might look like this:
+In Swift, it looks like this:
 
 ```Swift
 map[key]?.count ?? 0
@@ -513,9 +513,17 @@ foo {
 ```
 
 #### Explicit parameter names in Objective-C block types
+<primary-label ref="experimental-opt-in"/>
 
-Kotlin adds explicit parameter names to function types for exported Objective-C headers.
-Xcode's autocompletion then suggests these names when calling Objective-C functions in the Objective-C block.
+You can add explicit parameter names to Kotlin's function types for exported Objective-C headers. Xcode's autocompletion
+then suggests these names when calling Objective-C functions in the Objective-C block. This helps to avoid Clang warnings
+in generated blocks.
+
+To enable explicit parameter names, add the following [binary option](native-binary-options.md) to your `gradle.properties` file:
+
+```none
+kotlin.native.binary.objcExportBlockExplicitParameterNames=true
+```
 
 For example, for the following Kotlin code:
 
@@ -538,15 +546,6 @@ greetUserBlock:^(NSString *name) {
 > and generally doesn't affect calls from Swift.
 >
 {style="note"}
-
-If you encounter issues, you can disable explicit parameter names with the following [binary option](native-binary-options.md)
-in your `gradle.properties` file:
-
-```none
-kotlin.native.binary.objcExportBlockExplicitParameterNames=false
-```
-
-Please report such problems in our issue tracker, [YouTrack](https://kotl.in/issue).
 
 ### Generics
 
@@ -576,7 +575,7 @@ class Sample<T>() {
 }
 ```
 
-Looks in Swift like this:
+In Swift, it looks like this:
 
 ```swift
 class Sample<T>() {
@@ -710,7 +709,7 @@ inheriting Swift/Objective-C types.
 Normal methods can be overridden using the `override` Kotlin keyword. In this case, the overriding method must have the
 same parameter names as the overridden one.
 
-Sometimes it is required to override initializers, for example when subclassing `UIViewController`. Initializers imported
+Sometimes it is required to override initializers, for example, when subclassing `UIViewController`. Initializers imported
 as Kotlin constructors can be overridden by Kotlin constructors marked with the `@OverrideInit` annotation:
 
 ```swift

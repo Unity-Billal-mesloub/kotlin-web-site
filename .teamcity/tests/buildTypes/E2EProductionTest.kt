@@ -1,26 +1,23 @@
 package tests.buildTypes
 
+import common.E2ERunner
 import common.extensions.isProjectPlayground
-import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.buildFeatures.notifications
 import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.triggers.schedule
 
 
-object E2EProductionTest : BuildType({
+object E2EProductionTest : E2ERunner({
     name = "E2E Test in Production"
 
-    artifactRules = """
-        +:test-results/* => test-results.zip
-    """.trimIndent()
-
-    vcs {
-        root(vcsRoots.KotlinLangOrg)
+    params {
+        param("env.BASE_URL", "https://kotlinlang.org")
     }
 
     triggers {
         schedule {
+            enabled = !isProjectPlayground()
             schedulingPolicy = cron {
                 seconds = "0"
                 minutes = "0"
@@ -37,9 +34,11 @@ object E2EProductionTest : BuildType({
 
     steps {
         script {
+            name = "Run E2E tests"
+            // language=sh
             scriptContent = """
                 yarn install --immutable
-                yarn test:production:ci
+                yarn test:ci
             """.trimIndent()
             dockerImage = "mcr.microsoft.com/playwright:v1.57.0"
             dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
@@ -48,6 +47,7 @@ object E2EProductionTest : BuildType({
 
     features {
         notifications {
+            branchFilter = "+:master"
             enabled = !isProjectPlayground()
             notifierSettings = slackNotifier {
                 connection = "PROJECT_EXT_486"

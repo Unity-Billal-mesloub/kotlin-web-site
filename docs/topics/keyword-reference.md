@@ -66,7 +66,9 @@ as identifiers in other contexts:
  * `constructor` declares a [primary or secondary constructor](classes.md#constructors-and-initializer-blocks).
  * `delegate` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `dynamic` references a [dynamic type](dynamic-type.md) in Kotlin/JS code.
- * `field` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
+ * `field`
+     - declares an [explicit backing field](properties.md#explicit-backing-fields).
+     - is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `file` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `finally` begins a block that [is always executed when a try block exits](exceptions.md).
  * `get`
@@ -138,7 +140,7 @@ Kotlin supports the following operators and special symbols:
      - is used to specify [default values for parameters](functions.md#parameters-with-default-values).
  * `+=`, `-=`, `*=`, `/=`, `%=` - [augmented assignment operators](operator-overloading.md#augmented-assignments).
  * `++`, `--` - [increment and decrement operators](operator-overloading.md#increments-and-decrements).
- * `&&`, `||`, `!` - logical 'and', 'or', 'not' operators (for bitwise operations, use the corresponding [infix functions](numbers.md#operations-on-numbers) instead).
+ * `&&`, `||`, `!` - logical 'and', 'or', 'not' operators (for bitwise operations, use the corresponding [infix functions](numbers.md#bitwise-operations) instead).
  * `==`, `!=` - [equality operators](operator-overloading.md#equality-and-inequality-operators) (translated to calls of `equals()` for non-primitive types).
  * `===`, `!==` - [referential equality operators](equality.md#referential-equality).
  * `<`, `>`, `<=`, `>=` - [comparison operators](operator-overloading.md#comparison-operators) (translated to calls of `compareTo()` for non-primitive types).
@@ -147,6 +149,11 @@ Kotlin supports the following operators and special symbols:
  * `?.` performs a [safe call](null-safety.md#safe-call-operator) (calls a method or accesses a property if the receiver is non-nullable).
  * `?:` takes the right-hand value if the left-hand value is null (the [elvis operator](null-safety.md#elvis-operator)).
  * `::` creates a [member reference](reflection.md#function-references) or a [class reference](reflection.md#class-references).
+ * `.`
+     - accesses [members](classes.md), including [nested classes](nested-classes.md) and [enum entries](enum-classes.md#working-with-enum-constants).
+     - defines and calls [extensions](extensions.md).
+     - qualifies names and [packages](packages.md).
+     - separates the integer and fractional parts of a [floating-point literal](numbers.md#floating-point-types).
  * `..`, `..<` create [ranges](ranges.md).
  * `:` separates a name from a type in a declaration.
  * `?` marks a type as [nullable](null-safety.md#nullable-types-and-non-nullable-types).
@@ -166,4 +173,4 @@ Kotlin supports the following operators and special symbols:
      - substitutes an unused parameter in a [lambda expression](lambdas.md#underscore-for-unused-variables).
      - substitutes an unused parameter in a [destructuring declaration](destructuring-declarations.md#underscore-for-unused-variables).
 
-For operator precedence, see [this reference](https://kotlinlang.org/docs/reference/grammar.html#expressions) in Kotlin grammar.
+For operator precedence, see [this reference](https://kotlinlang.org/grammar/#expressions) in Kotlin grammar.

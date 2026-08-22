@@ -244,7 +244,7 @@ The default target version for Kotlin/JVM compilations is `1.8`. The `1.6` targe
 Please migrate to JVM target 1.8 or above. Learn how to update the JVM target version for:
 
 * [Gradle](gradle-compiler-options.md#attributes-specific-to-jvm)
-* [Maven](maven-compile-package.md#attributes-specific-to-jvm)
+* [Maven](maven-kotlin-compiler.md#attributes-specific-to-jvm)
 * [The command-line compiler](compiler-reference.md#jvm-target-version)
 
 ## Kotlin/Native
@@ -942,7 +942,7 @@ Enable the statistics in two steps:
   kapt.verbose=true
   ```
 
-> You can also enable verbose output via the [command line option `verbose`](kapt.md#use-in-cli).
+> You can also enable verbose output with the [command line option `verbose`](kapt.md#cli).
 >
 {style="note"}
 
@@ -977,7 +977,7 @@ kotlin.compiler.execution.strategy=out-of-process
 ```
 
 You can also use the compile task property `compilerExecutionStrategy`. Learn more about this on
-the [Gradle page](gradle-compilation-and-caches.md#defining-kotlin-compiler-execution-strategy).
+the [Compiler execution strategy page](compiler-execution-strategy.md).
 
 ### Removal of deprecated options, methods, and plugins
 
@@ -1081,5 +1081,5 @@ project. [Learn how to update to Kotlin 1.7.0](releases.md#update-to-a-new-kotli
 
 ### Compatibility guide for Kotlin 1.7.0
 
-Kotlin 1.7.0 is a [feature release](kotlin-evolution-principles.md#language-and-tooling-releases) and can, therefore, bring changes that are incompatible with your code written for earlier versions of the language.
+Kotlin 1.7.0 is a feature release and can, therefore, bring changes that are incompatible with your code written for earlier versions of the language.
 Find the detailed list of such changes in the [Compatibility guide for Kotlin 1.7.0](compatibility-guide-17.md).

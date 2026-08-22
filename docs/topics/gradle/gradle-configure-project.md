@@ -50,7 +50,10 @@ In the following table, there are the minimum and maximum **fully supported** ve
 
 | KGP version   | Gradle min and max versions           | AGP min and max versions                            |
 |---------------|---------------------------------------|-----------------------------------------------------|
-| 2.3.0         | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% |
+| 2.4.0-2.4.10  | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% |
+| 2.3.20–2.3.21 | 7.6.3–9.3.0                           | 8.2.2–9.0.0                                         |
+| 2.3.10        | 7.6.3–9.0.0                           | 8.2.2–9.0.0                                         |
+| 2.3.0         | 7.6.3–9.0.0                           | 8.2.2–8.13.0                                        |
 | 2.2.20–2.2.21 | 7.6.3–8.14                            | 7.3.1–8.11.1                                        |
 | 2.2.0–2.2.10  | 7.6.3–8.14                            | 7.3.1–8.10.0                                        |
 | 2.1.20–2.1.21 | 7.6.3–8.12.1                          | 7.3.1–8.7.2                                         |
@@ -308,7 +311,7 @@ A Java toolchain:
   if the user doesn't set the `jvmTarget` option explicitly.
   If the user doesn't configure the toolchain, the `jvmTarget` field uses the default value.
   Learn more about [JVM target compatibility](#check-for-jvm-target-compatibility-of-related-compile-tasks).
-* Sets the toolchain to be used by any Java compile, test and javadoc tasks.
+* Sets the toolchain to be used by any Java compile, test, and javadoc tasks.
 * Affects which JDK [`kapt` workers](kapt.md#run-kapt-tasks-in-parallel) are running on.
 
 Use the following code to set a toolchain. Replace the placeholder `<MAJOR_JDK_VERSION>` with the JDK version you would like to use:
@@ -497,23 +500,19 @@ objects from functional tests.
 
 ### Configure with Java Modules (JPMS) enabled
 
-To make the Kotlin Gradle plugin work with [Java Modules](https://www.oracle.com/corporate/features/understanding-java-9-modules.html), 
+To make the Kotlin Gradle plugin work with [Java Modules](https://dev.java/learn/modules/), 
 add the following lines to your build script and replace `YOUR_MODULE_NAME` with a reference to your JPMS module, for example, 
 `org.company.module`:
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
-        
-```kotlin
-// Add the following three lines if you use a Gradle version less than 7.0
-java {
-    modularity.inferModulePath.set(true)
-}
 
+```kotlin
 tasks.named("compileJava", JavaCompile::class.java) {
+    // Provide compiled Kotlin classes to javac – needed for Java/Kotlin mixed sources to work
+    val mainOutput: FileCollection = sourceSets["main"].output
     options.compilerArgumentProviders.add(CommandLineArgumentProvider {
-        // Provide compiled Kotlin classes to javac – needed for Java/Kotlin mixed sources to work
-        listOf("--patch-module", "YOUR_MODULE_NAME=${sourceSets["main"].output.asPath}")
+        listOf("--patch-module", "YOUR_MODULE_NAME=${mainOutput.asPath}")
     })
 }
 ```
@@ -522,17 +521,13 @@ tasks.named("compileJava", JavaCompile::class.java) {
 <tab title="Groovy" group-key="groovy">
 
 ```groovy
-// Add the following three lines if you use a Gradle version less than 7.0
-java {
-    modularity.inferModulePath = true
-}
-
 tasks.named("compileJava", JavaCompile.class) {
+    // Provide compiled Kotlin classes to javac – needed for Java/Kotlin mixed sources to work
+    FileCollection mainOutput = sourceSets["main"].output
     options.compilerArgumentProviders.add(new CommandLineArgumentProvider() {
         @Override
         Iterable<String> asArguments() {
-            // Provide compiled Kotlin classes to javac – needed for Java/Kotlin mixed sources to work
-            return ["--patch-module", "YOUR_MODULE_NAME=${sourceSets["main"].output.asPath}"]
+            return ["--patch-module", "YOUR_MODULE_NAME=${mainOutput.asPath}"]
         }
     })
 }

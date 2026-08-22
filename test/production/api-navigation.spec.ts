@@ -3,8 +3,6 @@ import { expect, Page, test } from '@playwright/test';
 test.describe('Api navigation', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/');
-        await page.waitForSelector('button.ch2-btn.ch2-btn-primary');
-        await page.click('button.ch2-btn.ch2-btn-primary');
         const navbar = page.locator('[data-test="header"]');
         const apiButton = navbar.getByText('API', { exact: true });
         await expect(apiButton).toBeVisible();
@@ -60,6 +58,13 @@ test.describe('Api navigation', () => {
         await expect(datetimeButton).toBeVisible();
         await datetimeButton.click();
         expect(page.url()).toContain('/api/kotlinx-datetime/');
+    });
+
+    test.skip('Click on "Immutable collections" button should open the related page', async ({ page }) => {
+        const immutableButton = await hoverOverApiElement(page, 'Immutable collections');
+        await expect(immutableButton).toBeVisible();
+        await immutableButton.click();
+        expect(page.url()).toContain('/api/kotlinx.collections.immutable/');
     });
 
     test('Click on "JVM Metadata" button should open the related page', async ({ page }) => {

@@ -122,7 +122,6 @@ class User(id: String) {
 ```
 
 ```java
-
 // Java
 class JavaClient {
     public String getID(User user) {
@@ -172,7 +171,6 @@ object Singleton {
 ```
 
 ```java
-
 // Java
 Singleton.provider = new Provider();
 // public static non-final field in Singleton class
@@ -199,7 +197,6 @@ const val MAX = 239
 In Java:
 
 ```java
-
 int constant = Obj.CONST;
 int max = ExampleKt.MAX;
 int version = C.VERSION;
@@ -207,13 +204,15 @@ int version = C.VERSION;
 
 ## Static methods
 
-As mentioned above, Kotlin represents package-level functions as static methods.
-Kotlin can also generate static methods for functions defined in named objects or companion objects if you annotate those
-functions as [`@JvmStatic`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html).
-If you use this annotation, the compiler generates both a static method in the enclosing class of the object and
-an instance method in the object itself. For example:
+Kotlin represents package-level functions as static methods.
+You can also generate static methods for functions defined in named objects or companion objects if you annotate such
+functions with the [`@JvmStatic`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/) annotation.
+
+If you use `@JvmStatic` on a function in a companion object, the compiler generates both a static method in the enclosing
+class and an instance method in the companion object:
 
 ```kotlin
+// Kotlin
 class C {
     companion object {
         @JvmStatic fun callStatic() {}
@@ -222,38 +221,40 @@ class C {
 }
 ```
 
-Now, `callStatic()` is static in Java while `callNonStatic()` is not:
+In Java, you can call `callStatic()` on both the enclosing class and the companion object, while `callNonStatic()` is only
+available through the companion object:
 
 ```java
-
-C.callStatic(); // works fine
-C.callNonStatic(); // error: not a static method
-C.Companion.callStatic(); // instance method remains
-C.Companion.callNonStatic(); // the only way it works
+// Java
+C.callStatic();              // Success
+C.callNonStatic();           // Error: not a static method
+C.Companion.callStatic();    // Instance method remains
+C.Companion.callNonStatic(); // Success
 ```
 
-Similarly, for named objects:
+For a named object (a singleton), `@JvmStatic` turns the function into a static method of the object's class but
+doesn't generate a separate instance method:
 
 ```kotlin
+// Kotlin
 object Obj {
     @JvmStatic fun callStatic() {}
     fun callNonStatic() {}
 }
 ```
 
-In Java:
+In Java, you can call the `callStatic()` method on the named object, while `callNonStatic()` is only available through
+the singleton instance:
 
 ```java
-
-Obj.callStatic(); // works fine
-Obj.callNonStatic(); // error
-Obj.INSTANCE.callNonStatic(); // works, a call through the singleton instance
-Obj.INSTANCE.callStatic(); // works too
+// Java
+Obj.callStatic();             // Success
+Obj.callNonStatic();          // Error: not a static method
+Obj.INSTANCE.callNonStatic(); // Success, the call passed through the singleton instance
 ```
 
-Starting from Kotlin 1.3, `@JvmStatic` applies to functions defined in companion objects of interfaces as well.
-Such functions compile to static methods in interfaces. Note that static method in interfaces were introduced in Java 1.8,
-so be sure to use the corresponding targets.  
+You can also annotate a function in an interface's companion object with `@JvmStatic`.
+Such functions compile to static methods in interfaces:
 
 ```kotlin
 interface ChatBot {
@@ -265,7 +266,7 @@ interface ChatBot {
 }
 ```
 
-You can also apply `@JvmStatic` annotation to the property of an object or a companion object making its getter and setter
+You can also apply the `@JvmStatic` annotation to the property of an object or a companion object, making its getter and setter
 methods static members in that object or the class containing the companion object.
 
 ## Default methods in interfaces
@@ -356,17 +357,21 @@ Only compatibility bridges and `DefaultImpls` classes are generated.
 
 ## Visibility
 
-The Kotlin visibility modifiers map to Java in the following way:
+The Kotlin maps visibility modifiers to Java as follows:
 
-* `private` members are compiled to `private` members.
-* `private` top-level declarations are compiled to `private` top-level declarations. Package-private accessors are also included,
-if accessed from within a class. 
-* `protected` remains `protected`. (Note that Java allows accessing protected members from other classes in the same package
-and Kotlin doesn't, so Java classes will have broader access to the code.)
-* `internal` declarations become `public` in Java. Members of `internal` classes go through name mangling, to make
-it harder to accidentally use them from Java and to allow overloading for members with the same signature that don't see
-each other according to Kotlin rules.
-* `public` remains `public`.
+* `private` members remain `private`.
+* `private` top-level declarations become `private` top-level declarations in Java. Package-private accessors are also
+  included if accessed from within a class. 
+* `protected` members remain `protected`.
+
+  Note that Java allows accessing protected members from other classes in the same package, and Kotlin doesn't.
+* `internal` declarations become `public` in Java.
+
+  The Kotlin compiler mangles the names of `internal` members in bytecode. This prevents accidental overrides across modules,
+  for example, when extending a Kotlin class from Java, and allows overloading for members with the same signature.
+
+  Note that the names of public members of `internal` classes aren't mangled and remain callable from Java.
+* `public` members remain `public`.
 
 ## KClass
 
@@ -423,12 +428,75 @@ var x: Int = 23
 
 ## Overloads generation
 
-Normally, if you write a Kotlin function with default parameter values, it is visible in Java only as a full
-signature, with all parameters present. If you wish to expose multiple overloads to Java callers, you can use the
+Normally, if you write a Kotlin function with default parameter values, it's visible in Java only as a full
+signature, with all parameters present.
+
+You can use the [`@IntroducedAt`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-introduced-at/) annotation or the
+[`@JvmOverloads`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html) annotation to generate overloads for optional parameters.
+
+Use `@IntroducedAt` when you add new optional parameters to published APIs and want the generated overloads to reflect
+the version in which each parameter was introduced.
+The compiler uses this information to automatically generate the corresponding hidden overloads.
+
+This gives you version-based overload generation and helps preserve
+binary compatibility for callers compiled against older versions of your library.
+
+> The `@IntroducedAt` annotation is [Experimental](components-stability.md#stability-levels-explained). To opt in, use the
+> `@OptIn(ExperimentalVersionOverloading::class)` annotation.
+> 
+{style="warning"}
+
+Here's an example where the `Button()` function receives multiple optional parameters over several API versions:
+
+```kotlin
+@OptIn(ExperimentalVersionOverloading::class)
+fun Button(
+    label: String = "",
+    color: Color = DefaultColor,
+    @IntroducedAt("1.1") borderColor: Color = DefaultBorderColor,
+    @IntroducedAt("1.2") borderStyle: Style = DefaultBorderStyle,
+    @IntroducedAt("1.2") borderWidth: Int = 1,
+    onClick: () -> Unit
+) {
+    // Function body
+}
+```
+
+Based on these versions, the compiler generates hidden overloads for the original API and for each API version that
+introduced new optional parameters:
+
+```kotlin
+// Original API
+Button(
+    label: String,
+    color: Color,
+    onClick: () -> Unit
+)
+
+// Version 1.1
+Button(
+    label: String,
+    color: Color,
+    borderColor: Color,
+    onClick: () -> Unit
+)
+
+// Version 1.2
+Button(
+    label: String,
+    color: Color,
+    borderColor: Color,
+    borderStyle: Style,
+    borderWidth: Int,
+    onClick: () -> Unit
+)
+```
+
+If you want to expose multiple overloads to Java callers, you can also use the
 [`@JvmOverloads`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html) annotation.
 
 The annotation also works for constructors, static methods, and so on. It can't be used on abstract methods, including
-methods defined in interfaces.
+methods defined in interfaces. For example, consider a `Circle` class with default parameter values:
 
 ```kotlin
 class Circle @JvmOverloads constructor(centerX: Int, centerY: Int, radius: Double = 1.0) {
@@ -449,6 +517,10 @@ void draw(String label, int lineWidth, String color) { }
 void draw(String label, int lineWidth) { }
 void draw(String label) { }
 ```
+
+Since both `@IntroducedAt` and `@JvmOverloads` annotations generate overloads, using them together can create conflicting overloads.
+If you use both annotations, the compiler reports a warning. If you suppress the warning, the compiler prioritizes
+overloads generated from the `@IntroducedAt` annotation.
 
 Note that, as described in [Secondary constructors](classes.md#secondary-constructors), if a class has default
 values for all constructor parameters, a public constructor with no arguments is generated for it. This works even
@@ -473,7 +545,6 @@ fun writeToFile() {
 And you want to call it from Java and catch the exception:
 
 ```java
-
 // Java
 try {
     demo.Example.writeToFile();

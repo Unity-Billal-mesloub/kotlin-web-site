@@ -15,6 +15,7 @@ export class CaseStudiesPage implements PageWithGlobalSearch {
     readonly switchAll: Locator;
     readonly switchKMP: Locator;
     readonly switchServerSide: Locator;
+    readonly switchAi: Locator;
     readonly filterBySharedCode: Locator;
     readonly filterByComposeUI: Locator;
     readonly gridItem: Locator;
@@ -32,14 +33,16 @@ export class CaseStudiesPage implements PageWithGlobalSearch {
         this.filterSwitch = this.filterBlock.getByTestId('filter-by-type');
         this.switchAll = this.filterSwitch.getByRole('button', { name: 'All' });
         this.switchKMP = this.filterSwitch.getByRole('button', { name: 'Kotlin Multiplatform' });
-        this.switchServerSide = this.filterSwitch.getByRole('button', { name: 'Server-side' });
+        this.switchServerSide = this.filterSwitch.getByRole('button', { name: 'Backend' });
+        this.switchAi = this.filterSwitch.getByRole('button', { name: 'AI' });
         this.filterBySharedCode = this.filterBlock.getByTestId('filter-by-shared-code').getByRole('checkbox');
         this.filterByComposeUI = this.filterBlock.getByTestId('filter-by-compose-ui');
         this.gridItem = this.gridBlock.getByTestId('case-studies-card');
     }
 
-    async init() {
-        await this.page.goto('/case-studies/');
+    async init(caseId? : string) {
+        const hash = caseId ? `#${caseId}` : '';
+        await this.page.goto(`/case-studies/${hash}`);
         await this.layout.waitFor();
     }
 

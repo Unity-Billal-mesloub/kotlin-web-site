@@ -50,6 +50,16 @@ test.describe('Case-studies landing page', async () => {
         await expect(caseStudiesPage.filterByComposeUI).toBeHidden();
     });
 
+    test('Case-studies: AI has no KMP filters', async ({ page }) => {
+        const caseStudiesPage = new CaseStudiesPage(page);
+        await caseStudiesPage.init();
+
+        await caseStudiesPage.selectType(caseStudiesPage.switchAi);
+        await caseStudiesPage.isSwitchActive(caseStudiesPage.switchAi);
+
+        await expect(caseStudiesPage.filterByComposeUI).toBeHidden();
+    });
+
     test('Case-studies: selected type is presented in url', async ({ page }) => {
         const caseStudiesPage = new CaseStudiesPage(page);
         await caseStudiesPage.init();
@@ -68,6 +78,26 @@ test.describe('Case-studies landing page', async () => {
             caseStudiesPage.selectType(caseStudiesPage.switchServerSide)
         ]);
 
-        expect(page.url()).toContain('type=server-side');
+        expect(page.url()).toContain('type=backend');
+
+        await Promise.all([
+            page.waitForNavigation({ waitUntil: 'networkidle' }),
+            caseStudiesPage.selectType(caseStudiesPage.switchAi)
+        ]);
+
+        expect(page.url()).toContain('type=ai');
+    });
+
+
+    test('Case-studies: should show the case card in the viewport when opening the page with anchor link', async ({ page }) => {
+        const caseStudiesPage = new CaseStudiesPage(page);
+        await caseStudiesPage.init();
+
+        const lastCaseCardId = await caseStudiesPage.gridItem.last().getAttribute('id');
+
+        await caseStudiesPage.init(lastCaseCardId);
+
+        const lastCard = caseStudiesPage.gridBlock.locator(`#${lastCaseCardId}`).first();
+        await expect(lastCard).toBeInViewport();
     });
 });

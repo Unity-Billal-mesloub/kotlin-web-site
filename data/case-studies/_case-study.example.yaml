@@ -3,7 +3,7 @@
 # Required fields:
 # - id: string — unique identifier of the case
 # - description: string — markdown-enabled text (supports **bold** and [links](https://example.com))
-# - type: string — one of: multiplatform | server-side
+# - type: string — one of: multiplatform | backend
 #
 # Optional fields:
 # - logo: list (0–2) of image paths (strings)
@@ -28,6 +28,9 @@
 #
 # - platforms: list of strings — platform tags shown on the card
 #     Examples: android, ios, desktop, frontend, backend, compose-multiplatform
+#
+# - frameworks: list of strings — framework tags shown on the card
+#     Examples: spring, ktor, exposed
 #
 # - media: object — media block for the card
 #     type: youtube | image
@@ -55,7 +58,7 @@
 
 items:
   - id: CompanyName        # required: unique identifier
-    type: server-side        # required: multiplatform | server-side
+    type: backend        # required: multiplatform | backend
     description: >        # required: markdown-supported text
       **Case description** supporting [links](https://example.com) and emphasis.
     logo: # optional: list of 0–2 image paths (strings)

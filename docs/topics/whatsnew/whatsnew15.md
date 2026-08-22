@@ -171,7 +171,7 @@ The default target version for Kotlin/JVM compilations is now `1.8`. The `1.6` t
 If you need a build for JVM 1.6, you can still switch to this target. Learn how:
 
 * [in Gradle](gradle-compiler-options.md#attributes-specific-to-jvm)
-* [in Maven](maven-compile-package.md#attributes-specific-to-jvm)
+* [in Maven](maven-kotlin-compiler.md#attributes-specific-to-jvm)
 * [in the command-line compiler](compiler-reference.md#jvm-target-version)
 
 ### SAM adapters via invokedynamic
@@ -186,7 +186,7 @@ which improves the JVM startup performance.
 
 To roll back to the old implementation scheme based on anonymous class generation, add the compiler option `-Xsam-conversions=class`.
 
-Learn how to add compiler options in [Gradle](gradle-compiler-options.md), [Maven](maven-compile-package.md#specify-compiler-options), and the [command-line compiler](compiler-reference.md#compiler-options).
+Learn how to add compiler options in [Gradle](gradle-compiler-options.md), [Maven](maven-kotlin-compiler.md#specify-compiler-options), and the [command-line compiler](compiler-reference.md#compiler-options).
 
 ### Lambdas via invokedynamic
 
@@ -208,7 +208,7 @@ lambda compilation:
 To try this feature, add the `-Xlambdas=indy` compiler option. We would be grateful if you could share your feedback on it using
 this [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-45375).
 
-Learn how to add compiler options in [Gradle](gradle-compiler-options.md), [Maven](maven-compile-package.md#specify-compiler-options), and [command-line compiler](compiler-reference.md#compiler-options).
+Learn how to add compiler options in [Gradle](gradle-compiler-options.md), [Maven](maven-kotlin-compiler.md#specify-compiler-options), and [command-line compiler](compiler-reference.md#compiler-options).
 
 ### Deprecation of @JvmDefault and old Xjvm-default modes
 
@@ -440,7 +440,8 @@ New operations for modular arithmetics have been added to the standard library:
 * `floorDiv()` returns the result of [floored division](https://en.wikipedia.org/wiki/Floor_and_ceiling_functions). It is available for integer types.
 * `mod()` returns the remainder of floored division (_modulus_). It is available for all numeric types.
 
-These operations look quite similar to the existing [division of integers](numbers.md#operations-on-numbers) and [rem()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/rem.html)
+These operations look quite similar to the existing
+[division of integers](numbers.md#integer-division) and [rem()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/rem.html)
 function (or the `%`operator), but they work differently on negative numbers:
 * `a.floorDiv(b)` differs from a regular `/` in that `floorDiv` rounds the result down (towards the lesser integer),
   whereas `/` truncates the result to the integer closer to 0.
@@ -797,5 +798,5 @@ To start a new project with Kotlin 1.5.0, update the Kotlin plugin and run the P
 
 The new command-line compiler is available for downloading on the [GitHub release page](https://github.com/JetBrains/kotlin/releases/tag/v1.5.0).
 
-Kotlin 1.5.0 is a [feature release](kotlin-evolution-principles.md#language-and-tooling-releases) and therefore can
+Kotlin 1.5.0 is a feature release and therefore can
 bring incompatible changes to the language. Find the detailed list of such changes in the [Compatibility Guide for Kotlin 1.5](compatibility-guide-15.md).

@@ -18,19 +18,19 @@ Kotlin is designed to be a pragmatic tool for programmers. When it comes to lang
 
 As this is key to understanding how Kotlin is moving forward, let's expand on these principles.
 
-**Keeping the Language Modern**. We recognize that systems accumulate legacy over time. What was once been cutting-edge
+**Keeping the Language Modern**. We recognize that systems accumulate legacy over time. What was once cutting-edge
 technology can become hopelessly outdated today. We have to evolve the language to keep it relevant to the needs of our users
 and up-to-date with their expectations. This includes not only adding new features, but also phasing out old ones that are
 no longer recommended for production use and have become legacy.
 
 **Comfortable Updates**. Incompatible changes, such as removing things from a language, may lead to painful migration from
 one version to the next if carried out without proper care. We will always announce such changes well in advance, mark things
-as deprecated and provide automated migration tools _before the change happens_. By the time the language changes we
+as deprecated and provide automated migration tools _before the change happens_. By the time the language changes, we
 want most of the code in the world to be already updated and thus have no issues migrating to the new version.
 
 **Feedback Loop**. Going through deprecation cycles requires significant effort, so we want to minimize the number of
 incompatible changes we'll be making in the future. Apart from using our best judgement, we believe that trying things out
-in real life is the best way to validate a design. Before casting things in stone we want them battle-tested. This is why
+in real life is the best way to validate a design. Before casting things in stone, we want them battle-tested. This is why
 we use every opportunity to make early versions of our designs available in production versions of the language, but in one
 of the _pre-stable_ statuses: [Experimental, Alpha, or Beta](components-stability.md). Such features are not stable,
 they can be changed at any time, and the users that opt into using them do so explicitly to indicate that they are ready
@@ -100,26 +100,23 @@ The Language Committee makes final decisions on which incompatible changes will 
 what exact measures should be taken to make user updates as seamless as possible.
 In doing so, it relies on a set of [Language committee guidelines](https://kotlinfoundation.org/language-committee-guidelines/).
 
-## Language and tooling releases
+## Language feature delivery
 
-Stable releases with versions, such as 2.0.0, are usually considered to be _language releases_ bringing major changes in the language.
-Normally, we publish _tooling releases_, numbered x.x.**20** in between language releases. 
+As described in the [Kotlin release process](releases.md), language features are shipped in _language releases_ (2._x_._0_)
+or their following _tooling releases_ (2._x_._20_).
 
-Tooling releases bring updates in the tooling (often including features), performance improvements, and bug fixes.
-We try to keep such versions compatible with each other,
-so changes to the compiler are mostly optimizations and warning additions/removals.
+We try to keep language and tooling releases compatible with each other, so changes to the compiler are mostly optimizations and warning additions/removals.
 Pre-stable features may be added, removed, or changed at any time.
 
-Language releases often add new features and may remove or change previously deprecated ones. 
-Feature graduation from pre-stable to stable also happens in language releases.
+Language releases often add new features, promote pre-stable features to stable, and may remove or change previously deprecated ones.
 
 ### EAP builds
 
 Before releasing stable versions of language and tooling releases, 
-we publish a number of preview builds dubbed EAP (for "Early Access Preview") that let us iterate faster and gather feedback from the community.
+we publish a number of preview builds dubbed _EAP_ (for "Early Access Preview") that let us iterate faster and gather feedback from the community.
 EAPs of language releases usually produce binaries that will be later rejected by the stable compiler
 to make sure that possible bugs in the binary format survive no longer than the preview period.
-Final Release Candidates normally do not bear this limitation.
+Final release candidates, such as RC2 or RC3, normally don't bear this limitation. For more information, see [Participate in the Kotlin Early Access Preview](eap.md).
 
 ### Pre-stable features
 
@@ -139,7 +136,7 @@ A Kotlin language feature can have one of the following statuses:
   Typically, ideas are documented as YouTrack issues, where the discussion continues.
 
 * **KEEP discussion**. We are fairly certain that the feature should be added to the language.
-  We aim to provide a motivation, use-cases, design, and other important details in a document called a _KEEP_.
+  We aim to provide motivation, use-cases, design, and other important details in a document called a _KEEP_.
   We expect feedback from users to focus on discussing all the information provided in the KEEP.
 
 * **In preview**. A feature prototype is ready, and you can enable it using a feature-specific compiler option.
@@ -209,20 +206,28 @@ and even when it's over and the change ships in a stable version, there's still 
 
 ### Compatibility options
 
-We provide compatiblity options that make a new Kotlin version emulate the behavior of an old one for compatibility purposes:
+We provide compatibility options that make a new Kotlin version emulate the behavior of an older one:
 
-* `-language-version X.Y` - compatibility mode for Kotlin language version X.Y, reports errors for all language features
-  that came out later.
-* `-api-version X.Y` - compatibility mode for Kotlin API version X.Y, reports errors for all code using newer APIs from
-  the Kotlin Standard Library (including the code generated by the compiler).
+* `-language-version X.Y` – compatibility mode for Kotlin language version X.Y. The compiler reports errors when your code uses language
+  features introduced in later versions.
+* `-api-version X.Y` – compatibility mode for Kotlin API version X.Y. The compiler ignores declarations that use Kotlin standard
+  library APIs introduced in later versions, including APIs referenced by compiler-generated code.
 
-To give you more time for migration, we support the development for at least three previous language and API versions
-in addition to the latest stable one.
+To give you more time to migrate, on the JVM we support at least three previous language and API versions in addition to the 
+latest stable version. This lets library authors adopt newer compiler releases while remaining compatible with consumers
+using older compiler versions. On other platforms, you can also configure older language and API versions, but unlike 
+on the JVM, consumers still need to use the latest compiler version.
+
+In most projects, set both options to the same version. A lower API version is mainly useful when you
+need to remain compatible with an older version of the Kotlin standard library.
 
 Actively maintained code bases can benefit from getting bug fixes as soon as possible, without waiting for a full deprecation cycle to complete.
-Currently, such projects can enable the `-progressive` option and get such fixes enabled even in tooling releases.
+These projects can enable the [`-progressive` option](compiler-reference.md#progressive) to adopt these changes in tooling releases
+before they become the default.
 
-All options are available in the IDE, command line, as well as in [Gradle](gradle-compiler-options.md) and in [Maven](maven-compile-package.md#specify-compiler-options).
+You can configure these options on the [command line](compiler-reference.md#common-options) or with the
+[Gradle](gradle-compiler-options.md#attributes-common-to-jvm-and-javascript) or [Maven](maven-kotlin-compiler.md#specify-compiler-options)
+build tools.
 
 ### Evolving the binary format
 

@@ -10,14 +10,18 @@ import { RouterCasesProvider } from '../../blocks/case-studies/filter/use-filter
 const TOP_MENU_ITEMS = [
     {
         url: '/case-studies/',
-        title: 'Success stories'
-    }
+        title: 'Success stories',
+    },
+    {
+        url: '/lp/enterprise-playbook/',
+        title: 'Enterprise playbook',
+    },
 ];
 
 function Index() {
     return (
         <LandingLayout
-            title="Kotlin Case Studies | Mobile, Web & Server-side"
+            title="Kotlin Case Studies | Mobile, Web & Backend"
             ogImageName={'case-studies.png'}
             description="Discover how teams use Kotlin to build backend services, multiplatform apps, and modern UIs. Explore real-world case studies and success stories."
             currentTitle={CASE_STUDIES_TITLE}
@@ -25,7 +29,6 @@ function Index() {
             topMenuItems={TOP_MENU_ITEMS}
             topMenuButton={<Button href="https://kotlinlang.org/docs/getting-started.html">Get started</Button>}
             dataTestId={'case-studies-page'}
-            canonical={'https://kotlinlang.org/case-studies/'}
         >
             <CaseStudiesHero />
             <CaseStudiesFilter />

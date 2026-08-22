@@ -1,6 +1,6 @@
 items:
   #------------------------------------------------------------------------
-  - id: case-study-duolingo
+  - id: duolingo
     type: multiplatform
     description: >-
       “One exciting trend for **Duolingo** is that the more that we use Kotlin
@@ -16,11 +16,12 @@ items:
     platforms:
       - android
       - ios
+      - frontend
     media:
       type: youtube
       videoId: RJtiFt5pbfs
   #------------------------------------------------------------------------
-  - id: case-study-forbes
+  - id: forbes
     type: multiplatform
     description: >-
       By sharing over 80% of logic across iOS and Android, **Forbes** now rolls out new features simultaneously on
@@ -36,7 +37,28 @@ items:
     isExternal: true
     link: https://www.forbes.com/sites/forbes-engineering/2023/11/13/forbes-mobile-app-shifts-to-kotlin-multiplatform/
   #------------------------------------------------------------------------
-  - id: case-study-google-workspace
+  - id: sony
+    type: multiplatform
+    description: >-
+      Sony's journey to Kotlin Multiplatform wasn't just about efficiency; it was about capability.
+
+
+      We migrated from native plans to a unified KMP and Compose Multiplatform workflow, delivering a robust companion app for our flagship headphones, with background execution and sensor integration to millions of users worldwide.
+    signature:
+      name: Sergio Carrilho
+      position: TechLead at Sony
+    link: https://youtu.be/VVf6txPZk3Y
+    linkText: Watch the full video
+    isExternal: true
+    media:
+      type: image
+      path: /images/case-studies/sony-preview.png
+    platforms:
+      - android
+      - ios
+      - compose-multiplatform
+  #------------------------------------------------------------------------
+  - id: google-workspace
     type: multiplatform
     description: >-
       “We consider Kotlin Multiplatform validated in our **Google Docs** experiment […] we consider the experiment a success […] We’re actually very happy with it”
@@ -56,7 +78,25 @@ items:
       type: youtube
       videoId: 5lkZj4v4-ks
   #------------------------------------------------------------------------
-  - id: case-study-bilibili
+  - id: booking
+    type: multiplatform
+    logo:
+      - /images/case-studies/booking-logo.svg
+    description: >-
+      “Adopting KMP for our experimentation library was a calculated bet. Best case: we save time and guarantee cross-platform consistency. Worst case: we rewrite the library in Swift. The reality exceeded our expectations: KMP performed great on iOS, proving it’s a viable, long-term solution for our team.”
+    signature:
+      name: Diego Gómez Olvera
+      position: Principal Android Developer
+    link: https://medium.com/booking-com-development/kotlin-multiplatform-in-production-two-real-world-use-cases-from-booking-com-46ffe13a773d
+    isExternal: true
+    carousel: true
+    platforms:
+      - android
+      - ios
+      - frontend
+      - compose-multiplatform
+  #------------------------------------------------------------------------
+  - id: bilibili
     type: multiplatform
     logo:
       - /images/case-studies/bilibili-logo.svg
@@ -65,8 +105,7 @@ items:
       **BiliBili** (China version) has adopted Kotlin Multiplatform and Compose Multiplatform for the Instant
       Message feature.
     isExternal: true
-    linkText: Watch the full video
-    link: https://www.bilibili.com/video/BV1es421T71C/
+    link: https://mp.weixin.qq.com/s/yRwkbQxFsRBNZW3Z-S1A8Q
     platforms:
       - android
       - ios
@@ -75,7 +114,19 @@ items:
       type: image
       path: /images/case-studies/bilibili-card-preview.png
   #------------------------------------------------------------------------
-  - id: case-study-mcdonalds-umain
+  - id: jetbrains
+    type: ai
+    description: >-
+      To build AI tools that deeply understand the Kotlin ecosystem, **JetBrains** implemented a hybrid
+      architecture. They use on-device machine learning to gather project context and index official
+      documentation, delivering fast, Kotlin-aware code completions while keeping cloud costs low.
+    logo:
+      - /images/case-studies/jetbrains-logo.svg
+    media:
+      type: youtube
+      videoId: 1ipJ-tdcmwE
+  #------------------------------------------------------------------------
+  - id: mcdonalds-umain
     type: multiplatform
     description: >-
       “After a successful initial test with the
@@ -97,7 +148,45 @@ items:
       type: youtube
       videoId: uCkYZ-PvCmw
   #------------------------------------------------------------------------
-  - id: case-study-h&m
+  - id: philo
+    type: multiplatform
+    description: >-
+      The Philo Engineering team has been using Kotlin Multiplatform (KMP) across our mobile, 
+      TV, and web clients in production for three years. 
+      […] 
+      More recently, we’ve adopted agentic AI workflows across several processes. 
+      We still see substantial value in a shared business-logic project in an agentic development world. 
+      The calculus hasn’t changed: incremental velocity gains, improved stability, and operational excellence still matter.
+      Kotlin is approachable for both humans and robots, and a smaller code surface area helps agents keep context sizes reasonable and token burn efficient.
+    logo:
+      - /images/case-studies/philo-logo.svg
+    alternateLogo:
+      - /images/case-studies/philo-logo-dark.svg
+    carousel: true
+    platforms:
+      - android
+      - ios
+      - frontend
+    isExternal: true
+    link: https://www.philo.com/blog/kotlin-multiplatform-at-philo-3-years-later      
+  #------------------------------------------------------------------------
+  - id: workday
+    type: multiplatform
+    description: >-
+      At **Workday**, Kotlin Multiplatform (KMP) entered the landscape not as another framework, but as a flexible technology that empowered us to share code where it makes sense, without sacrificing the quality and the performance of the native experience our users expect.
+    signature:
+      name: Ahmed Mohamed
+      position: Senior Software Engineer, Workday
+    logo:
+      - /images/case-studies/workday-logo.png
+    carousel: true
+    platforms:
+      - android
+      - ios
+    isExternal: true
+    link: https://medium.com/workday-engineering/adopting-kotlin-multiplatform-a-practical-guide-to-unifying-codebases-1b333436061e
+  #------------------------------------------------------------------------
+  - id: h&m
     type: multiplatform
     description: >-
       **H&M** adopted Kotlin Multiplatform to build a shared feature-toggle library for their Android and iOS apps. 
@@ -112,7 +201,7 @@ items:
     isExternal: true
     link: https://medium.com/@charankumar-hm/our-journey-with-kotlin-multiplatform-from-curiosity-to-production-eeb788b620da
   #------------------------------------------------------------------------
-  - id: case-study-x
+  - id: x
     type: multiplatform
     description: >-
       “Starting from this small of a team, it was a huge speed win for **X**
@@ -125,11 +214,26 @@ items:
     platforms:
       - android
       - ios
+      - frontend
     media:
       type: youtube
       videoId: z-u99yZFn5o
   #------------------------------------------------------------------------
-  - id: case-study-bolt
+  - id: deutsche-telekom
+    type: ai
+    description: >-
+      **Deutsche Telekom** built one of the largest LLM-powered chatbots in Europe, handling 500,000
+      conversations a month, using a multi-agent platform written entirely in Kotlin. To scale their AI
+      development, they created ARC, an open-source agentic framework that utilizes a custom Kotlin DSL.
+      This approach allows their teams to rapidly prototype, deploy, and observe distinct AI agents as
+      independent microservices without disrupting the entire ecosystem.
+    logo:
+      - /images/case-studies/deutsche-telekom-logo.svg
+    media:
+      type: youtube
+      videoId: mQhtLCMiUMA
+  #------------------------------------------------------------------------
+  - id: bolt
     type: multiplatform
     description: >-
       “At **Bolt**, we develop and support multiple mobile apps that
@@ -149,7 +253,7 @@ items:
       type: youtube
       videoId: Qu3jZX8RyFk
   #------------------------------------------------------------------------
-  - id: case-study-bitkey-by-block
+  - id: bitkey-by-block
     type: multiplatform
     description: >-
       **Bitkey by Block** shares 95% of its mobile codebase with Kotlin Multiplatform, ensuring consistency in its
@@ -165,7 +269,7 @@ items:
     isExternal: true
     link: https://engineering.block.xyz/blog/how-bitkey-uses-cross-platform-development
   #------------------------------------------------------------------------
-  - id: case-study-meetup
+  - id: meetup
     type: multiplatform
     description: >-
       **Meetup** achieved the simultaneous release of new features by utilizing KMP to share application logic.
@@ -181,7 +285,21 @@ items:
       type: youtube
       videoId: GtJBS7B3eyM
   #------------------------------------------------------------------------
-  - id: case-study-travelperk
+  - id: uber
+    type: ai
+    description: >-
+      To accelerate the migration of millions of lines of Java code to Kotlin, **Uber** integrated LLMs
+      into their internal platform tooling. Rather than relying on raw AI code generation, which can be
+      risky for a flagship mobile app, Uber uses a dual-LLM setup to analyze thousands of past manual
+      commits and generate deterministic, reusable migration rules. This AI-assisted workflow safely and
+      drastically reduced the timeline required to transition to a modern Kotlin codebase.
+    logo:
+      - /images/case-studies/uber-logo.svg
+    media:
+      type: youtube
+      videoId: K2PN03AepC0
+  #------------------------------------------------------------------------
+  - id: travelperk
     type: multiplatform
     description: >-
       Compose Multiplatform already powers features in **Perk's** iOS and Android apps. We started with a small shared UI component, 
@@ -201,7 +319,7 @@ items:
     isExternal: true
     link: https://builders.travelperk.com/compose-multiplatform-at-perk-a-pragmatic-look-at-our-journey-so-far-fedd666e9726
   #------------------------------------------------------------------------
-  - id: case-study-markaz
+  - id: markaz
     type: multiplatform
     description: >-
       **Markaz** is Pakistan’s second-largest e-commerce platform,
@@ -222,7 +340,7 @@ items:
       type: image
       path: /images/case-studies/markaz-card-preview.png
   #------------------------------------------------------------------------
-  - id: case-study-philips
+  - id: philips
     type: multiplatform
     description: >-
       “We consolidated all our business logic into shared code,
@@ -241,7 +359,22 @@ items:
       type: youtube
       videoId: Qu3jZX8RyFk
   #------------------------------------------------------------------------
-  - id: case-study-cash-app
+  - id: mercedes-benz
+    type: ai
+    description: >-
+      "Since Kotlin is the language of choice for server-side applications, it's a natural decision to
+      experiment with it using the Koog framework by JetBrains, aligning with our goals of reliability
+      and maintainability. […] Thanks to Kotlin's strong typing and concise syntax, reasoning steps
+      remain explicit and testable."
+    signature:
+      name: Bruno Ferreira
+      position: Software Architect at Mercedes-Benz.io
+    logo:
+      - /images/case-studies/mercedes-benz-logo.svg
+    isExternal: true
+    link: https://www.mercedes-benz.io/blog/2025-11-14-the-guardrails-your-llm-needs-reliable-agent-based-systems
+  #------------------------------------------------------------------------
+  - id: cash-app
     type: multiplatform
     description: >-
       **Cash App** gradually transitioned from shared JavaScript to KMP in 2018. This move streamlined
@@ -254,9 +387,9 @@ items:
     platforms:
       - android
       - ios
-    link: https://kotlinlang.org/lp/multiplatform/case-studies/cash-app
+    link: /case-studies/cash-app/
   #------------------------------------------------------------------------
-  - id: case-study-posten-bring
+  - id: posten-bring
     type: multiplatform
     description: >-
       **Posten Bring**, a 377-year-old norwegian national postal service, unified complex business logic across
@@ -271,7 +404,7 @@ items:
       type: youtube
       videoId: OuX5325yq_I
   #------------------------------------------------------------------------
-  - id: case-study-wrike
+  - id: wrike
     type: multiplatform
     description: >-
       **Wrike** adopted Compose Multiplatform early, with CMP-powered
@@ -296,7 +429,31 @@ items:
       type: youtube
       videoId: jhBmom8z3Qg
   #------------------------------------------------------------------------
-  - id: case-study-autodesk
+  - id: gooddata
+    type: ai
+    description: >-
+      **GoodData** built an AI agent in Kotlin to automate routine production alert investigations.
+      It analyzes monitoring data and internal engineering knowledge, then gives engineers a clear
+      report on the likely cause and where to look next. The result: 90% less time spent on
+      investigations and faster decisions during incidents.
+    logo:
+      - /images/case-studies/gooddata-logo.svg
+    isExternal: true
+    link: https://www.gooddata.ai/blog/ai-on-duty/
+  #------------------------------------------------------------------------
+  - id: doist
+    type: multiplatform
+    description: >-
+      Why did iOS developers at **Doist** want Kotlin Multiplatform?
+      Doist uses KMP in its award-winning Todoist app to share core logic between Android and iOS – maintaining consistent behavior and streamlining development across platforms.
+    platforms:
+      - android
+      - ios
+    media:
+      type: youtube
+      videoId: z-o9MqN86eE
+  #------------------------------------------------------------------------
+  - id: autodesk
     type: multiplatform
     description: >-
       **Autodesk** uses KMP to unify offline synchronization logic and data models across iOS, Android, and
@@ -310,9 +467,9 @@ items:
       - android
       - ios
       - desktop
-    link: https://kotlinlang.org/lp/multiplatform/case-studies/autodesk
+    link: /case-studies/autodesk/
   #------------------------------------------------------------------------
-  - id: case-study-feres
+  - id: feres
     type: multiplatform
     description: >-
       **Feres**, a taxi app with 1M+ downloads, shares 100% of its business logic using KMP, and more than 90% of
@@ -328,7 +485,7 @@ items:
       type: image
       path: /images/case-studies/feres-card-preview.png
   #------------------------------------------------------------------------
-  - id: case-study-baidu
+  - id: baidu
     type: multiplatform
     description: >-
       **Baidu** uses KMP in their Wonder App to unify the data layer and business logic across iOS and Android,
@@ -339,9 +496,9 @@ items:
     platforms:
       - android
       - ios
-    link: https://kotlinlang.org/lp/multiplatform/case-studies/baidu/
+    link: /case-studies/baidu/
   #------------------------------------------------------------------------
-  - id: case-study-prezzee
+  - id: prezzee
     type: multiplatform
     description: >-
       "The decision to adopt KMP three years ago has paid dividends in team growth, code quality, and business value. 
@@ -356,7 +513,7 @@ items:
     isExternal: true
     link: https://engineering.prezzee.com/from-native-to-multiplatform-our-journey-with-kotlin-multiplatform-at-prezzee-fa5f613939a3
   #------------------------------------------------------------------------
-  - id: case-study-opensooq
+  - id: opensooq
     type: multiplatform
     description: >-
       "With KMP embedded into the foundation of our mobile architecture (91–98% shared code across key modules), 
@@ -370,7 +527,7 @@ items:
     isExternal: true
     link: https://medium.com/@hani.a/kotlin-multiplatform-at-opensooq-accelerating-mobile-development-across-android-and-ios-a6496e7d5eca
   #------------------------------------------------------------------------
-  - id: case-study-physics-wallah
+  - id: physics-wallah
     type: multiplatform
     description: >-
       Around 20% of our **Physics Wallah** App,
@@ -397,7 +554,31 @@ items:
       type: image
       path: /images/case-studies/physics-wallah-card-preview.png
   #------------------------------------------------------------------------
-  - id: case-study-vmware
+  - id: amazon
+    type: backend
+    description: >-
+      How does Kotlin perform at Amazon-scale?
+
+
+      In this talk, Katie Levy, Senior Software Engineer at Amazon Fashion, shares how her team migrated a 10,000-line backend service from Java to Kotlin while powering an AI-driven size recommendation system used by hundreds of millions of customers across 19 locales.
+    logo:
+      - /images/case-studies/amazon-logo.svg
+    media:
+      type: youtube
+      videoId: rvyUgcxfang
+  #------------------------------------------------------------------------
+  - id: worldline-server-side
+    type: backend
+    description: >-
+      Discover how Worldline powers digital banking innovation with over one million active users every month. Lead Developer Richard Marchant shares why the team chose Kotlin to build their Conversational Platform from the ground up. From faster feature development to reduced runtime errors, Kotlin’s concise syntax and safety features transformed their workflow. Now, with Kotlin Multiplatform and company-wide training, Worldline is driving a modern, collaborative future in fintech development.
+    logo:
+      - /images/case-studies/worldline-logo.svg
+    carousel: true
+    media:
+      type: youtube
+      videoId: 3IxDICQTutw
+  #------------------------------------------------------------------------
+  - id: vmware
     type: multiplatform
     description: >-
       **VMware** uses KMP in various modules to enable different use cases in a consistent, cross-platform way right
@@ -410,7 +591,7 @@ items:
     isExternal: true
     link: https://medium.com/vmware-end-user-computing/adopting-a-cross-platform-strategy-for-mobile-apps-59495ffa23b0
   #------------------------------------------------------------------------
-  - id: case-study-down-dog
+  - id: down-dog
     type: multiplatform
     description: >-
       **Down Dog** uses a "maximum shared Kotlin" strategy for their application, which brings a studio-like yoga
@@ -425,13 +606,12 @@ items:
       - ios
       - frontend
       - backend
-    isExternal: true
-    link: https://kotlinlang.org/lp/multiplatform/case-studies/down-dog
+    link: /case-studies/down-dog/
     media:
       type: image
       path: /images/case-studies/down-dog-card-preview.png
   #------------------------------------------------------------------------
-  - id: case-study-netflix
+  - id: netflix
     type: multiplatform
     description: >-
       **Netflix** uses KMP to share logic for their mobile studio apps, reducing duplication and enabling faster,
@@ -446,7 +626,7 @@ items:
     isExternal: true
     link: https://netflixtechblog.com/netflix-android-and-ios-studio-apps-kotlin-multiplatform-d6d4d8d25d23
   #------------------------------------------------------------------------
-  - id: case-study-9gag
+  - id: 9gag
     type: multiplatform
     description: >-
       **9GAG** opted for KMP after trying both Flutter and React Native. They gradually adopted the technology and
@@ -461,7 +641,7 @@ items:
     isExternal: true
     link: https://raymondctc.medium.com/adopting-kotlin-multiplatform-mobile-kmm-on-9gag-app-dfe526d9ce04
   #------------------------------------------------------------------------
-  - id: case-study-instabee
+  - id: instabee
     type: multiplatform
     description: >-
       Compose Multiplatform really simplified adding support for
@@ -478,7 +658,7 @@ items:
       type: youtube
       videoId: HNFi7dw_mp8
   #------------------------------------------------------------------------
-  - id: case-study-careem
+  - id: careem
     type: multiplatform
     description: >-
       **Careem**, a vehicle-for-hire company, adopted KMP while migrating their Android app to Kotlin. This move
@@ -494,7 +674,7 @@ items:
       type: youtube
       videoId: DcO9psUh4LI
   #------------------------------------------------------------------------
-  - id: case-study-fast-and-fit
+  - id: fast-and-fit
     type: multiplatform
     description: >-
       By sharing over 90% of the **Fast&Fit** codebase, including the entire UI, through KMP and Compose
@@ -508,7 +688,7 @@ items:
       type: image
       path: /images/case-studies/fast-and-fit-card-preview.png
   #------------------------------------------------------------------------
-  - id: case-study-balary
+  - id: balary
     type: multiplatform
     description: >-
       Balary is built using KMP and Compose Multiplatform, sharing most of the UI across Android and iOS. For
@@ -522,7 +702,7 @@ items:
       type: image
       path: /images/case-studies/balary-card-preview.png
   #------------------------------------------------------------------------
-  - id: case-study-quizlet
+  - id: quizlet
     type: multiplatform
     description: >-
       KMP drives global learning platform **Quizlet's** web and mobile apps, which boast a combined 100 million
@@ -538,7 +718,7 @@ items:
     isExternal: true
     link: https://quizlet.com/blog/shared-code-kotlin-multiplatform
   #------------------------------------------------------------------------
-  - id: case-study-kuaishou
+  - id: kuaishou
     type: multiplatform
     description: >-
       **Kuaishou**, China's pioneering short video platform, has been using KMP for two years, significantly cutting
@@ -551,7 +731,7 @@ items:
     isExternal: true
     link: https://medium.com/@xiang.j9501/case-studies-kuaiying-kotlin-multiplatform-mobile-268e325f8610
   #------------------------------------------------------------------------
-  - id: case-study-worldline
+  - id: worldline
     type: multiplatform
     description: >-
       **Worldline** embraced KMP to revamp their Eroski app. Transitioning from Java and Objective-C, the team
@@ -569,7 +749,7 @@ items:
       type: image
       path: /images/case-studies/worldline-card-preview.png
   #------------------------------------------------------------------------
-  - id: case-study-touchlab
+  - id: touchlab
     type: multiplatform
     description: >-
       **Touchlab** works with organizations adopting and scaling KMP. From startups to multinationals with tens of
@@ -586,7 +766,7 @@ items:
     isExternal: true
     link: https://touchlab.co/
   #------------------------------------------------------------------------
-  - id: case-study-mirego
+  - id: mirego
     type: multiplatform
     description: >-
       **Mirego** uses KMP to run the same business logic on the web, iOS (iPhone and iPad), tvOS, Android (device
@@ -597,9 +777,20 @@ items:
       - android
       - ios
       - frontend
-    link: https://kotlinlang.org/lp/multiplatform/case-studies/mirego
+    link: /case-studies/mirego/
   #------------------------------------------------------------------------
-  - id: case-study-music-work
+  - id: wolt
+    type: backend
+    description: >-
+      Wolt, a technology company specializing in local commerce and delivery logistics (part of DoorDash),
+      shares how Kotlin has become a core part of their backend systems and engineering culture.
+    logo:
+      - /images/case-studies/wolt-logo.svg
+    media:
+      type: youtube
+      videoId: puBXoKkQInE
+  #------------------------------------------------------------------------
+  - id: music-work
     type: multiplatform
     description: >-
       **Music Work** uses Compose Multiplatform for 100% of its UI across all supported platforms. Its architecture
@@ -615,7 +806,7 @@ items:
       type: image
       path: /images/case-studies/music-work-card-preview.png
   #------------------------------------------------------------------------
-  - id: case-study-fastwork
+  - id: fastwork
     type: multiplatform
     description: >-
       **Fastwork** uses KMP for their domain and data layers to help them share their business logic and API
@@ -627,9 +818,9 @@ items:
     platforms:
       - android
       - ios
-    link: https://kotlinlang.org/lp/multiplatform/case-studies/fastwork
+    link: /case-studies/fastwork/
   #------------------------------------------------------------------------
-  - id: case-study-memrise
+  - id: memrise
     type: multiplatform
     description: >-
       **Memrise**, one of the world's most popular language learning apps, has incrementally migrated the logic of
@@ -644,7 +835,7 @@ items:
     isExternal: true
     link: https://engineering.memrise.com/kotlin-multiplatform-memrise-3764b5a4a0db
   #------------------------------------------------------------------------
-  - id: case-study-meituan
+  - id: meituan
     type: multiplatform
     description: >-
       **Meituan** uses KMP to develop client applications for its restaurant management system, across Android,
@@ -659,7 +850,7 @@ items:
       - desktop
       - compose-multiplatform
     isExternal: true
-    link: https://www.bilibili.com/video/BV1es421T71C
+    link: https://www.bilibili.com/video/BV1es421T71C/
   #------------------------------------------------------------------------
   - id: kotlin-multiplatform
     type: multiplatform
@@ -671,11 +862,11 @@ items:
 
       Kotlin Multiplatform is used by over 20,000 companies worldwide, including industry leaders across various sectors such as finance, e-commerce, social media, and more.
     linkText: Explore the stories
-    link: https://www.jetbrains.com/help/kotlin-multiplatform-dev/use-cases-examples.html
+    link: /docs/multiplatform/use-cases-examples.html
     linkStyle: button
   #------------------------------------------------------------------------
-  - id: case-study-google-server-side
-    type: server-side
+  - id: google-server-side
+    type: backend
     description: >-
       **Google** has adopted Kotlin as a recommended language for server-side JVM development while maintaining full access to its vast Java ecosystem. With over 11 million lines of Kotlin code across server and Android projects, the company has taken extensive steps to support developer success.
     logo:
@@ -686,8 +877,8 @@ items:
       type: youtube
       videoId: o14wGByBRAQ
   #------------------------------------------------------------------------
-  - id: case-study-kakao-pay
-    type: server-side
+  - id: kakao-pay
+    type: backend
     description: >-
       A leading fintech company in South Korea, **Kakao Pay** uses Kotlin with Spring for a significant part of its server-side development. Their Insurance team shares how Kotlin’s features help them build and operate stable backend services.
     logo:
@@ -699,8 +890,8 @@ items:
     isExternal: true
     link: https://blog.jetbrains.com/kotlin/2025/07/case-study-why-kakao-pay-chose-kotlin-for-backend-development/
   #------------------------------------------------------------------------
-  - id: case-study-kingfisher
-    type: server-side
+  - id: kingfisher
+    type: backend
     description: >-
       **Kingfisher** – a leading international home improvement company with brands like B&Q and Castorama – made Kotlin its default language for backend services to modernize and streamline engineering practices.
     logo:
@@ -710,48 +901,56 @@ items:
     isExternal: true
     link: https://medium.com/kingfisher-technology/server-side-kotlin-our-new-default-2d15644f8ed0
   #------------------------------------------------------------------------
-  - id: case-study-mercedes-benz-io
-    type: server-side
+  - id: mercedes-benz-io
+    type: backend
     description: >-
-      The **Mercedes-Benz.io** team shares their experience migrating backend services from Java to Kotlin, highlighting the reasons behind the switch, challenges encountered, and the benefits to their development workflows.
+      Tiago, Software Architect at Mercedes-Benz.io, shares how his team builds cloud-native apps with Kotlin and Spring Boot, serving over 3.5 million users daily.
+
+
+      Discover why they moved from Java to Kotlin — cutting boilerplate, improving stability, and speeding up development. Today, Kotlin powers their backend, mobile apps, and multiplatform projects, driving faster, cleaner, and more reliable code.
+
+
+      Watch the video testimonial or [read the article ↗](https://www.mercedes-benz.io/blog/2024-11-22-transitioning-from-java-to-kotlin-in-backend-development).
     logo:
       - /images/case-studies/mercedes-benz-logo.svg
     isExternal: true
     carousel:
       logo: /images/case-studies/carousel/mercedes-benz.svg
-    link: https://www.mercedes-benz.io/blog/2024-11-22-transitioning-from-java-to-kotlin-in-backend-development
+    media:
+      type: youtube
+      videoId: oaJpj18OqY0
   #------------------------------------------------------------------------
-  - id: case-study-novatec
-    type: server-side
+  - id: novatec
+    type: backend
     description: >-
       **Novatec** chose Kotlin for improved readability and conciseness across a variety of backend projects.
     logo:
       - /images/case-studies/novatec-logo.svg
     carousel:
       logo: /images/case-studies/carousel/novatec.svg
-    link: https://kotlinlang.org/lp/server-side/case-studies/novatec
+    link: /case-studies/novatec/
   #------------------------------------------------------------------------
-  - id: case-study-fairef
-    type: server-side
+  - id: fairef
+    type: backend
     description: >-
       **Faire** built scalable backend services in Kotlin to power its disruptive SMB marketplace, improving efficiency from the early stages of the company.
     logo:
       - /images/case-studies/faire-logo.svg
     carousel:
       logo: /images/case-studies/carousel/faire.svg
-    link: https://kotlinlang.org/lp/server-side/case-studies/faire
+    link: /case-studies/faire/
   #------------------------------------------------------------------------
-  - id: case-study-doordash
-    type: server-side
+  - id: doordash
+    type: backend
     description: >-
       A quick overview of how DoorDash split their existing legacy monolith into multiple backend services, which they developed in Kotlin.
     logo:
       - /images/case-studies/doordash-logo.svg
     carousel: true
-    link: https://kotlinlang.org/lp/server-side/case-studies/doordash
+    link: /case-studies/doordash/
   #------------------------------------------------------------------------
-  - id: case-study-adobe
-    type: server-side
+  - id: adobe
+    type: backend
     description: >-
       **Adobe** discusses why Kotlin is preferred over Java for server-side app development in Adobe Experience Platform, citing productivity and language features.
     logo:
@@ -761,8 +960,8 @@ items:
     isExternal: true
     link: https://medium.com/adobetech/streamlining-server-side-app-development-with-kotlin-be8cf9d8b61a
   #------------------------------------------------------------------------
-  - id: case-study-aws-qldb
-    type: server-side
+  - id: aws-qldb
+    type: backend
     description: >-
       The **AWS** team explains how Amazon Quantum Ledger Database (QLDB) uses Kotlin, why it was chosen over Java for the project, and their overall experience.
     logo:
@@ -773,8 +972,8 @@ items:
     isExternal: true
     link: https://open.spotify.com/episode/3jtfD8a5vwutOrfHZMqAj1
   #------------------------------------------------------------------------
-  - id: case-study-atlassian
-    type: server-side
+  - id: atlassian
+    type: backend
     description: >-
       **Atlassian** uses Kotlin to power the future of Jira Software cloud products, supporting a decomposed, service-based architecture.
     logo:
@@ -785,28 +984,30 @@ items:
       type: youtube
       videoId: 4GkoB4hZUnw
   #------------------------------------------------------------------------
-  - id: case-study-expedia
-    type: server-side
+  - id: expedia
+    type: backend
     description: >-
       **Expedia** uses Kotlin and Spring Boot for GraphQL APIs, leveraging Kotlin’s null safety and Java interop to modernize their backend.
     logo:
       - /images/case-studies/expedia-logo.svg
     carousel: true
-    link: https://kotlinlang.org/lp/server-side/case-studies/expedia
+    link: /case-studies/expedia/
   #------------------------------------------------------------------------
-  - id: case-study-ing
-    type: server-side
+  - id: ing
+    type: backend
     description: >-
-      **ING** shares the story of introducing Kotlin on the backend in a large organization, with tips for reducing friction during adoption.
+      ING’s Mobile Banking team shares how they modernized their mission-critical payment engine using Kotlin, supporting 6 million mobile users and processing 4.5 billion payments each year. Moving from a large Java codebase to a cleaner Kotlin architecture improved code quality, stability, and resource efficiency, especially through Kotlin’s null safety and coroutines.
+      For more details, [read the article ↗](https://medium.com/ing-blog/introducing-kotlin-at-ing-a-long-but-rewarding-story-1bfcd3dc8da0) or watch the video below.
     logo:
       - /images/case-studies/ing-logo.svg
     carousel:
       logo: /images/case-studies/carousel/ing.svg
-    isExternal: true
-    link: https://medium.com/ing-blog/introducing-kotlin-at-ing-a-long-but-rewarding-story-1bfcd3dc8da0
+    media:
+      type: youtube
+      videoId: mexcjkGZIm8
   #------------------------------------------------------------------------
-  - id: case-study-intuit
-    type: server-side
+  - id: intuit
+    type: backend
     description: >-
       **Intuit** highlights how Kotlin has increased developer productivity and helped shape their development plan.
     logo:
@@ -818,8 +1019,8 @@ items:
       type: youtube
       videoId: P6G2YPuDE3Y
   #------------------------------------------------------------------------
-  - id: case-study-flux
-    type: server-side
+  - id: flux
+    type: backend
     description: >-
       **Flux** uses Kotlin on the backend to develop services that replace paper receipts, benefiting from language features and ecosystem support.
     logo:
@@ -829,8 +1030,8 @@ items:
     isExternal: true
     link: https://open.spotify.com/episode/3VS5dSUfcsC4fSvzbm2OxV
   #------------------------------------------------------------------------
-  - id: case-study-allegro
-    type: server-side
+  - id: allegro
+    type: backend
     description: >-
       **Allegro**, the largest Polish online retailer, adopted Kotlin first for server-side development and later for mobile, sharing insights from their journey.
     logo:
@@ -839,8 +1040,8 @@ items:
     isExternal: true
     link: https://open.spotify.com/episode/6gRiIJSWN515tAvZuMAwRR
   #------------------------------------------------------------------------
-  - id: case-study-olx
-    type: server-side
+  - id: olx
+    type: backend
     description: >-
       **OLX** describes adopting Kotlin for a financial application, addressing questions about language validity and long-term support.
     logo:
@@ -850,8 +1051,8 @@ items:
     isExternal: true
     link: https://open.spotify.com/episode/3XBlKY3x4vVojuay4oSh8g
   #------------------------------------------------------------------------
-  - id: case-study-shazam
-    type: server-side
+  - id: shazam
+    type: backend
     description: >-
       **Shazam** split a large monolith into microservices, many of which are written in Kotlin, improving backend scalability and maintainability.
     logo:
@@ -861,8 +1062,8 @@ items:
     isExternal: true
     link: https://open.spotify.com/episode/6oZdJE7XU1GF6Dlir6tP50
   #------------------------------------------------------------------------
-  - id: case-study-n26
-    type: server-side
+  - id: n26
+    type: backend
     description: >-
       **N26** outlines five reasons for moving backend services to Kotlin, including developer experience and reliability.
     logo:
@@ -872,8 +1073,8 @@ items:
     isExternal: true
     link: https://medium.com/insiden26/5-reasons-why-n26-is-moving-to-kotlin-f920b184ab58
   #------------------------------------------------------------------------
-  - id: case-study-memo-bank
-    type: server-side
+  - id: memo-bank
+    type: backend
     description: >-
       **Memo Bank** chose Kotlin over other JVM languages thanks to seamless Java interoperability, conciseness, type safety, and great IDE support.
     logo:
@@ -883,8 +1084,8 @@ items:
     isExternal: true
     link: https://medium.com/memobank/cuddling-with-kotlin-35f4f96931bb
   #------------------------------------------------------------------------
-  - id: case-study-ktor
-    type: server-side
+  - id: ktor
+    type: backend
     description: >-
       **Ktor**, JetBrains’ asynchronous framework for connected systems, enables Kotlin server-side development with a lightweight, flexible toolkit.
     logo:
@@ -894,8 +1095,8 @@ items:
     isExternal: true
     link: https://open.spotify.com/episode/7rcwW7gNFIOrDqy6tgA1HU
   #------------------------------------------------------------------------
-  - id: case-study-spring-framework
-    type: server-side
+  - id: spring-framework
+    type: backend
     description: >-
       **Spring Framework** introduced first-class Kotlin support to enable fully idiomatic Kotlin code when developing Spring applications, further improving interoperability with Java libraries.
     logo:
@@ -905,13 +1106,29 @@ items:
     isExternal: true
     link: https://spring.io/blog/2017/01/04/introducing-kotlin-support-in-spring-framework-5-0
   #------------------------------------------------------------------------
-  - id: case-study-corda
-    type: server-side
+  - id: corda
+    type: backend
     description: >-
       **Corda** is built entirely in Kotlin, sharing background on why they chose the language and lessons from their “year of enterprise Kotlin”.
     logo:
       - /images/case-studies/corda-logo.svg
     carousel: true
     isExternal: true
-    link: https://www.corda.net/blog/kotlin/
+    link: https://kotlin.link/articles/Corda-Kotlin.html
+  #------------------------------------------------------------------------
+  - id: pincode
+    type: multiplatform
+    description: >-
+      **Pincode Business** uses KMP to share business logic and Compose Multiplatform (CMP) to share UI across
+      Android and Desktop apps. What started as a pure Android app has now evolved into a cross-platform solution,
+      enabling sellers to manage their business seamlessly across platforms. We could leverage the team's existing
+      expertise in Kotlin and Jetpack Compose, making the transition seamless.
+    logo:
+      - /images/case-studies/pincode-logo.svg
+    platforms:
+      - android
+      - desktop
+      - compose-multiplatform
+    isExternal: true
+    link: https://tech.phonepe.com/pincode-migration-journey-with-compose-multiplatform/
   #------------------------------------------------------------------------

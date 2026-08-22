@@ -1,18 +1,7 @@
-[//]: # (title: Intermediate: Libraries and APIs)
+[//]: # (title: Libraries and APIs)
 
 <no-index/>
 
-<tldr>
-    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-intermediate-extension-functions.md">Extension functions</a><br />
-        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-intermediate-scope-functions.md">Scope functions</a><br />
-        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-intermediate-lambdas-receiver.md">Lambda expressions with receiver</a><br />
-        <img src="icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-intermediate-classes-interfaces.md">Classes and interfaces</a><br />
-        <img src="icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-intermediate-objects.md">Objects</a><br />
-        <img src="icon-6-done.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-intermediate-open-special-classes.md">Open and special classes</a><br />
-        <img src="icon-7-done.svg" width="20" alt="Seventh step" /> <a href="kotlin-tour-intermediate-properties.md">Properties</a><br />
-        <img src="icon-8-done.svg" width="20" alt="Eighth step" /> <a href="kotlin-tour-intermediate-null-safety.md">Null safety</a><br />
-        <img src="icon-9.svg" width="20" alt="Ninth step" /> <strong>Libraries and APIs</strong><br /></p>
-</tldr>
 
 To get the most out of Kotlin, use existing libraries and APIs so you can spend more time coding and less time 
 reinventing the wheel.
@@ -176,7 +165,7 @@ fun main() {
 
 This is the easiest way to opt in, but there are other ways. To learn more, see [Opt-in requirements](opt-in-requirements.md).
 
-## Practice
+## Practice {completion-point="true"}
 
 ### Exercise 1 {initial-collapse-state="collapsed" collapsible="true" id="libraries-exercise-1"}
 
@@ -300,9 +289,19 @@ What should the opt-in look like in your code?
 
 ## What's next?
 
-Congratulations! You've completed the intermediate tour! As a next step, check out our tutorials for popular Kotlin applications:
+Congratulations! You've completed the intermediate tour! Would you like to [share your feedback](https://surveys.hotjar.com/bf4ce865-99ce-4fc1-b107-e9b16bc31592) about your experience? 
+
+As a next step, check out our tutorials for popular Kotlin applications:
 
 * [Create a backend application with Spring Boot and Kotlin](jvm-create-project-with-spring-boot.md)
 * Create a cross-platform application for Android and iOS from scratch and:
     * [Share business logic while keeping the UI native](https://kotlinlang.org/docs/multiplatform/multiplatform-create-first-app.html)
     * [Share business logic and UI](https://kotlinlang.org/docs/multiplatform/compose-multiplatform-create-first-app.html)
+
+<seealso></seealso>
+
+<list id="tour-nav">
+  <li>
+    <a as="button" href="kotlin-tour-intermediate-null-safety.md" mode="outline" icon="arrow-left" icon-position="left">Previous step</a>
+  </li>
+</list>

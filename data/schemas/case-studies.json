@@ -15,7 +15,7 @@
       "type": "object",
       "properties": {
         "id": { "type": "string", "minLength": 1 },
-        "type": { "enum": ["multiplatform", "server-side"] },
+        "type": { "enum": ["multiplatform", "backend", "ai"] },
         "description": { "type": "string", "minLength": 1 },
         "logo": {
           "type": "array",
@@ -71,6 +71,17 @@
               "frontend",
               "backend",
               "compose-multiplatform"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "frameworks": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "spring",
+              "exposed",
+              "ktor"
             ]
           },
           "uniqueItems": true

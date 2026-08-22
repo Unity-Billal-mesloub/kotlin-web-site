@@ -1,4 +1,4 @@
-[//]: # (title: Compatibility guide for Kotlin 2.3)
+[//]: # (title: Compatibility guide for Kotlin 2.3.x)
 
 _[Keeping the Language Modern](kotlin-evolution-principles.md)_ and _[Comfortable Updates](kotlin-evolution-principles.md)_ are among the fundamental principles in
 Kotlin Language Design. The former says that constructs which obstruct language evolution should be removed, and the
@@ -365,6 +365,7 @@ perspective (for example, from Java) is out of the scope of this document.
 >
 > - 2.2.20: report a warning
 > - 2.3.0: raise the warning to an error
+> - 2.4.0: remove the function
 
 ### Remove `closureTo()`, `createResultSet()`, and `KotlinToolingVersionOrNull()` functions
 
@@ -438,6 +439,7 @@ perspective (for example, from Java) is out of the scope of this document.
 >
 > - 2.2.0 and 2.2.20: report warnings when using these functions or properties
 > - 2.3.0: raise the warnings to errors
+> - 2.4.0: remove the functions and properties
 
 ### Deprecate support for PhantomJS
 
@@ -484,6 +486,7 @@ perspective (for example, from Java) is out of the scope of this document.
 >
 > - 2.2.0: report a warning for code that creates subclasses from these classes
 > - 2.3.0: raise the warnings to errors
+> - 2.4.0: remove the APIs
 
 ### Deprecate `ExperimentalWasmDsl` annotation class
 
@@ -499,6 +502,7 @@ perspective (for example, from Java) is out of the scope of this document.
 >
 > - 2.0.20: report a warning
 > - 2.3.0: raise the warning to an error
+> - 2.4.0: remove the annotation class
 
 ### Deprecate `ExperimentalDceDsl` annotation class
 
@@ -514,6 +518,7 @@ perspective (for example, from Java) is out of the scope of this document.
 >
 > - 2.2.0: report a warning
 > - 2.3.0: raise the warning to an error
+> - 2.4.0: remove the annotation class
 
 ### Deprecate JavaScript utilities
 
@@ -538,6 +543,7 @@ perspective (for example, from Java) is out of the scope of this document.
 > - 2.2.0: report a warning when the `NodeJsSetupTask.Companion.NAME` property and functions are used
 > - 2.2.20: report a warning when the `JsIrBinary.generateTs` property is used
 > - 2.3.0: raise the warnings to errors
+> - 2.4.0: remove the APIs
 
 ### Deprecate migrated D8 and Binaryen properties
 
@@ -563,6 +569,7 @@ perspective (for example, from Java) is out of the scope of this document.
 >
 > - 2.2.0: report a warning
 > - 2.3.0: raise the warning to an error
+> - 2.4.0: remove the properties
 
 ### Deprecate `create()` function in `NodeJsExec` DSL
 
@@ -579,6 +586,7 @@ perspective (for example, from Java) is out of the scope of this document.
 >
 > - 2.1.20: report a warning
 > - 2.3.0: raise the warning to an error
+> - 2.4.0: remove the function
 
 ### Deprecate properties in `kotlinOptions` DSL
 
@@ -615,6 +623,7 @@ perspective (for example, from Java) is out of the scope of this document.
 >
 > - 2.2.0: report a warning when the `kotlinArtifacts` API is used
 > - 2.3.0: raise this warning to an error
+> - 2.4.0: remove the API
 
 ### Remove `kotlin.mpp.resourcesResolutionStrategy` Gradle property
 
@@ -734,6 +743,118 @@ perspective (for example, from Java) is out of the scope of this document.
 >
 > - 2.2.20: report a warning
 > - 2.3.0: raise the warning to an error
+> - 2.4.0: remove the function
+
+### Change the approach to registering all generated sources
+
+> **Issue**: [KT-45161](https://youtrack.jetbrains.com/issue/KT-45161)
+>
+> **Component**: Gradle
+>
+> **Incompatible change type**: source
+>
+> **Short summary**: Kotlin 2.3.0 introduces a new [Experimental](components-stability.md#stability-levels-explained) API in the [`KotlinSourceSet`](https://kotlinlang.org/api/kotlin-gradle-plugin/kotlin-gradle-plugin-api/org.jetbrains.kotlin.gradle.plugin/-kotlin-source-set/) interface that lets you [register generated
+> sources](gradle-configure-project.md#register-generated-sources) in a Gradle project. Previously, you could use the [`kotlin`](https://kotlinlang.org/api/kotlin-gradle-plugin/kotlin-gradle-plugin-api/org.jetbrains.kotlin.gradle.plugin/-kotlin-source-set/kotlin.html) property
+> to access all generated sources. Starting with Kotlin 2.3.0, if your plugin or build logic needs access to all generated
+> sources, use the [`allKotlinSources`](https://kotlinlang.org/api/kotlin-gradle-plugin/kotlin-gradle-plugin-api/org.jetbrains.kotlin.gradle.plugin/-kotlin-source-set/all-kotlin-sources.html) property instead.
+>
+> **Migration advice**:
+> * To register generated sources, use the [`generatedKotlin`](https://kotlinlang.org/api/kotlin-gradle-plugin/kotlin-gradle-plugin-api/org.jetbrains.kotlin.gradle.plugin/-kotlin-source-set/generated-kotlin.html) property.
+> * To access all sources, including non-generated sources, use the [`allKotlinSources`](https://kotlinlang.org/api/kotlin-gradle-plugin/kotlin-gradle-plugin-api/org.jetbrains.kotlin.gradle.plugin/-kotlin-source-set/all-kotlin-sources.html) property.
+
+### Deprecate `kotlin.publishJvmEnvironmentAttribute` property
+
+> **Issue**: [KT-83678](https://youtrack.jetbrains.com/issue/KT-83678)
+>
+> **Component**: Gradle
+>
+> **Incompatible change type**: source
+>
+> **Short summary**: In Kotlin 2.3.20, the `kotlin.publishJvmEnvironmentAttribute` property is deprecated.
+> This property allowed disabling the publication of the `org.gradle.jvm.environment` attribute for multiplatform libraries.
+> Starting with Kotlin 2.0.20, `org.gradle.jvm.environment` is published by default to ensure conventional dependency resolution.
+>
+> **Deprecation cycle**:
+>
+> - 2.3.20: report a warning
+> - 2.4.0: remove the property
+
+### Deprecate `CleanableStore` interface and `CleanDataTask` class
+
+> **Issue**: [KT-78104](https://youtrack.jetbrains.com/issue/KT-78104)
+>
+> **Component**: Gradle
+>
+> **Incompatible change type**: source
+>
+> **Short summary**: The `CleanableStore` interface and `CleanDataTask` class are deprecated since they are no longer used.
+>
+> **Deprecation cycle**:
+>
+> - 2.3.20: report a warning
+
+### Deprecate `kotlin.kmp.isolated-projects.support` Gradle property
+
+> **Issue**: [KT-79257](https://youtrack.jetbrains.com/issue/KT-79257)
+>
+> **Component**: Gradle
+>
+> **Incompatible change type**: source
+>
+> **Short summary**: Since multiplatform projects are compatible with isolated projects by default and there are no other options,
+> the `kotlin.kmp.isolated-projects.support` Gradle property is deprecated.
+>
+> **Deprecation cycle**:
+>
+> - 2.3.20: report a warning
+
+### Deprecate `kotlin.mpp.enableKotlinToolingMetadataArtifact` Gradle property
+
+> **Issue**: [KT-79924](https://youtrack.jetbrains.com/issue/KT-79924)
+>
+> **Component**: Gradle
+>
+> **Incompatible change type**: source
+>
+> **Short summary**: Since the `kotlin-tooling-metadata.json` artifact is now always generated for multiplatform projects, the 
+> `kotlin.mpp.enableKotlinToolingMetadataArtifact` Gradle property is deprecated.
+>
+> **Deprecation cycle**:
+>
+> - 2.3.20: report a warning
+> - 2.4.0: remove support
+
+### Deprecate `LanguageSettings.enableLanguageFeature` DSL
+
+> **Issue**: [KT-82323](https://youtrack.jetbrains.com/issue/KT-82323), [KT-82847](https://youtrack.jetbrains.com/issue/KT-82847)
+>
+> **Component**: Gradle
+>
+> **Incompatible change type**: source
+>
+> **Short summary**: The `LanguageSettings.enableLanguageFeature` DSL exposed an internal compiler configuration only intended
+> for Kotlin compiler tests. Therefore, the DSL is deprecated.
+>
+> **Deprecation cycle**:
+>
+> - 2.3.20: report a warning when using `LanguageSettings.enableLanguageFeature`
+> - 2.4.0: raise the warning to an error
+
+### Deprecate "out of process" compiler execution strategy
+
+> **Issue**: [KT-83125](https://youtrack.jetbrains.com/issue/KT-83125)
+>
+> **Component**: Gradle
+>
+> **Incompatible change type**: source
+>
+> **Short summary**: The "out of process" [compiler execution strategy](compiler-execution-strategy.md) is not supported by the [Build tools API](build-tools-api.md)
+> and is the slowest strategy available. In Kotlin 2.3.20, the strategy is deprecated in favor of "daemon" and "in process" compiler execution strategies.
+>
+> **Deprecation cycle**:
+>
+> - 2.3.20: report a warning
+> - 2.4.0: remove the "out of process" compiler execution strategy
 
 ## Build tool removal
 

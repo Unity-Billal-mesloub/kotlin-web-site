@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { ThemeProvider } from '@rescui/ui-contexts';
 import { Button } from '@rescui/button';
 
-import { useTS } from '@jetbrains/kotlin-web-site-ui/out/components/breakpoints';
-import '@jetbrains/kotlin-web-site-ui/out/components/layout';
+import '@jetbrains/kotlin-web-site-ui/out/components/layout-v2';
+import { useML } from '@jetbrains/kotlin-web-site-ui/out/components/breakpoints-v2';
 
 import GlobalHeader from '@jetbrains/kotlin-web-site-ui/out/components/header';
 import { CtaBlock } from '@jetbrains/kotlin-web-site-ui/out/components/cta-block-v2';
@@ -15,19 +15,17 @@ import GlobalFooter from '@jetbrains/kotlin-web-site-ui/out/components/footer';
 
 import { Layout } from '../components/layout/layout';
 
-import { HeroSection } from '../blocks/main/hero/hero';
 import { LatestNews } from '../blocks/main/latest-news';
 import { KotlinUsageHighlights } from '../blocks/main/kotlin-usage-highlights/kotlin-usage-highlights';
 import { InfoBlock } from '../blocks/main/info-block/info-block';
 import { DividerLine } from '../blocks/main/divider-line/divider-line';
 import { FoundationLearnMoreButton, FoundationPreview } from '../blocks/main/foundation-preview/foundation-preview';
-import { WhyKotlin } from '../blocks/main/why-kotlin/why-kotlin';
 
 import { StickyHeader } from '../components/sticky-header/sticky-header';
 
 import MultiplatformPreviewImage from '../public/images/main/multiplatform-preview.svg';
 
-import GradleLogo from '../public/images/companies/gradle.svg';
+import GradleLogo from '../public/images/companies/gradle-logo.png';
 import UberLogo from '../public/images/companies/uber.svg';
 import AtlassianLogo from '../public/images/companies/atlassian.svg';
 import GoogleLogo from '../public/images/companies/google.svg';
@@ -44,13 +42,15 @@ import MetaLogo from '../public/images/companies/meta.svg';
 import BlockLogo from '../public/images/companies/block.svg';
 
 import styles from './index.module.css';
+import cn from 'classnames';
 
 import searchConfig from '../search-config.json';
 
-
 import releasesDataRaw from '../data/releases.yml';
-import { KotlinPlusAiInfo } from '../blocks/main/kotlin-plus-ai';
-import { KotlinConfBanner } from '../blocks/main/kotlin-conf-banner';
+import { HeroBlock } from '../blocks/main/hero/hero-block';
+import { PromoBanner } from '../blocks/main/promo-banner';
+import { KotlinEffectBanner } from '@/blocks/main/kotlin-effect-banner';
+import { KotlinAiBanner } from '@/blocks/main/kotlin-ai-banner';
 
 const releasesData: ReleasesData = releasesDataRaw as ReleasesData;
 
@@ -64,9 +64,9 @@ const kotlinUsageHighlightsCases = [
     },
     {
         company: 'AWS',
-        url: 'https://talkingkotlin.com/qldb/',
+        url: 'https://open.spotify.com/episode/3jtfD8a5vwutOrfHZMqAj1',
         text: 'AWS opted for Kotlin over Java for Amazon Quantum Ledger Database (QLDB) thanks to its expressiveness and structured concurrency. They rewrote QLDB in Kotlin, enhancing the user experience, benefiting from its development workflow, and adopting it fully for server-side development.',
-        tag: 'Server-side',
+        tag: 'Backend',
         logo: AWSLogo
     },
     {
@@ -78,9 +78,9 @@ const kotlinUsageHighlightsCases = [
     },
     {
         company: 'Adobe',
-        url: 'https://blog.developer.adobe.com/streamlining-server-side-app-development-with-kotlin-be8cf9d8b61a',
+        url: 'https://medium.com/adobetech/streamlining-server-side-app-development-with-kotlin-be8cf9d8b61a',
         text: 'Adobe Experience Platform chose Kotlin for server-side development because of its concise syntax, async capabilities, and interoperability with Java. This shift boosted productivity and improved the developer experience, replacing Java for real-time services.',
-        tag: 'Server-side',
+        tag: 'Backend',
         logo: AdobeLogo
     },
     {
@@ -94,7 +94,7 @@ const kotlinUsageHighlightsCases = [
         company: 'Atlassian',
         url: 'https://www.youtube.com/watch?v=4GkoB4hZUnw',
         text: 'Atlassian adopted Kotlin for the Jira Software cloud, leveraging its Java compatibility for seamless integration and minimizing migration challenges. Kotlin\'s ease of use improved developer productivity and boosted team satisfaction and efficiency.',
-        tag: 'Server-side',
+        tag: 'Backend',
         logo: AtlassianLogo
     }
 ];
@@ -147,15 +147,16 @@ export async function getStaticProps() {
 }
 
 function Index() {
-    const isTS = useTS();
+    const isML = useML();
 
     return (
         <Layout
             title={'Kotlin Programming Language'}
             ogImageName={'general.png'}
             description={
-                'Kotlin is a concise and multiplatform programming language by JetBrains. Enjoy coding and build server-side, mobile, web, and desktop applications efficiently.'
+                'Kotlin is a concise and multiplatform programming language by JetBrains. Enjoy coding and build backend, mobile, web, and desktop applications efficiently.'
             }
+            className={cn(styles.mainPage, 'ktl-layout-to-2')}
         >
             <ThemeProvider theme="dark">
                 <StickyHeader>
@@ -167,24 +168,23 @@ function Index() {
                     ></GlobalHeader>
                 </StickyHeader>
 
-                <HeroSection title={'Kotlin'}>
-                    Concise. Multiplatform. Fun.
-                </HeroSection>
-
-                <KotlinConfBanner />
+                <HeroBlock />
 
                 <div className={'ktl-layout ktl-layout--center'}>
+                    <KotlinEffectBanner />
+
+                    <KotlinAiBanner />
+
                     <LatestNews />
                 </div>
-                <WhyKotlin />
             </ThemeProvider>
 
             <ThemeProvider theme="light">
-                <div className={styles.evenSection} data-testid={"highlighted-cases-section"}>
+                <div className={styles.evenSection} data-testid={'highlighted-cases-section'}>
                     <div className={'ktl-layout ktl-layout--center'}>
                         <KotlinUsageHighlights title="Kotlin in action" items={kotlinUsageHighlightsCases} />
 
-                        <DividerLine />
+                        <PromoBanner />
 
                         <InfoBlock
                             title={<>Share code on&nbsp;your terms and&nbsp;for different platforms</>}
@@ -199,13 +199,11 @@ function Index() {
                             }
                             button={
                                 <Button href="/multiplatform/" size="l" mode="rock" theme="light">
-                                    {isTS ? 'Learn more' : 'Learn about Kotlin Multiplatform'}
+                                    {isML ? 'Learn more' : 'Learn about Kotlin Multiplatform'}
                                 </Button>
                             }
                             media={<img src={MultiplatformPreviewImage.src} alt="" />}
                         />
-
-                        <KotlinPlusAiInfo />
 
                         <InfoBlock
                             title={'Big, friendly and helpful community'}
@@ -243,7 +241,7 @@ function Index() {
 
                     <CtaBlock
                         className={styles.ctaBlock}
-                        mainTitle={<>Start using{isTS && <br />} Kotlin today!</>}
+                        mainTitle={<>Start using{isML && <br />} Kotlin today!</>}
                         buttons={
                             <Button
                                 href="/docs/getting-started.html"
